@@ -4,24 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HockeyData
+namespace Hockey.Data
 {
-    internal class Shot
+    public enum Shot
     {
-        // data fields
-        private string _name;
-
-        // properties
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-
-        // constructors
-        public Shot(string name)
-        {
-            _name = name;
-        }
+        Left = 1,
+        Right,
     }
 }

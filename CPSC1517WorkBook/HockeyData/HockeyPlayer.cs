@@ -1,7 +1,13 @@
-﻿using HockeyData;
+﻿using Hockey.Data;
 
 namespace Hockey.Data
 {
+    /// <summary>
+    /// an instance of this class will hold data about a hockey player
+    /// The code for this class is the definition of that data
+    /// The characteristics (data) of the class are:
+    ///     first name, last name, birth place, date of birth, height, weight, position, shot
+    /// </summary>
     public class HockeyPlayer
     {
         // data fields
