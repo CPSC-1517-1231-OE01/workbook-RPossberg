@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34004.107
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HockeyData", "HockeyData\HockeyData.csproj", "{DE0C067F-4738-43EC-981B-2CBE9B1CB293}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HockeyData", "HockeyData\HockeyData.csproj", "{DE0C067F-4738-43EC-981B-2CBE9B1CB293}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Utilities.csproj", "{2695D1CE-5EC2-45FE-8F3F-7912984945D4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HockeyConsoleApp", "HockeyConsoleApp\HockeyConsoleApp.csproj", "{DF0E69DC-BE45-423E-AE3F-8FD188610FEA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HockeyTestProject", "HockeyTestProject\HockeyTestProject.csproj", "{A8EFBBCC-21BA-4CDC-9C98-4F5804E904BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyUtilitiesTestProject", "MyUtilitiesTestProject\MyUtilitiesTestProject.csproj", "{87642455-76D2-40C4-99FA-EB0737A655CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{DE0C067F-4738-43EC-981B-2CBE9B1CB293}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE0C067F-4738-43EC-981B-2CBE9B1CB293}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE0C067F-4738-43EC-981B-2CBE9B1CB293}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2695D1CE-5EC2-45FE-8F3F-7912984945D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2695D1CE-5EC2-45FE-8F3F-7912984945D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2695D1CE-5EC2-45FE-8F3F-7912984945D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2695D1CE-5EC2-45FE-8F3F-7912984945D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF0E69DC-BE45-423E-AE3F-8FD188610FEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF0E69DC-BE45-423E-AE3F-8FD188610FEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF0E69DC-BE45-423E-AE3F-8FD188610FEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF0E69DC-BE45-423E-AE3F-8FD188610FEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8EFBBCC-21BA-4CDC-9C98-4F5804E904BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8EFBBCC-21BA-4CDC-9C98-4F5804E904BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8EFBBCC-21BA-4CDC-9C98-4F5804E904BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8EFBBCC-21BA-4CDC-9C98-4F5804E904BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87642455-76D2-40C4-99FA-EB0737A655CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87642455-76D2-40C4-99FA-EB0737A655CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87642455-76D2-40C4-99FA-EB0737A655CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87642455-76D2-40C4-99FA-EB0737A655CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

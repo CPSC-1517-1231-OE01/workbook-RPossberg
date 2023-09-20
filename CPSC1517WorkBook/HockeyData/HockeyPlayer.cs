@@ -1,4 +1,6 @@
-﻿namespace Hockey.Data
+﻿using Utils;
+
+namespace Hockey.Data
 {
     /// <summary>
     /// An instance of this class will hold data about a hockey player
@@ -148,7 +150,7 @@
                 // The return has a syntax of return expression
                 return _firstName; // return the value of the data field
             }
-            init // init is a new keyword in C# 9.0
+            set // init is a new keyword in C# 9.0
             {
                 // Mutator
                 // The set block will assign a value to the associated data field,
@@ -157,9 +159,9 @@
                 // During the set, you may also want to perform some logical processing on the incoming data to set another field.
 
                 // Ensure the incoming value is not null, empty or whitespace (invalid values)
-                if (string.IsNullOrWhiteSpace(value)) // if the value is null or whitespace
+                if (Utilities.IsNullEmptyOrWhiteSpace(value)) // if the value is null or whitespace
                 {
-                    throw new System.ArgumentException("First name cannot be null or whitespace", nameof(value));
+                    throw new System.ArgumentException("First name cannot be null or whitespace.");
                 }
                 // If we get here, the value is valid and we can assign to the data field
                 _firstName = value; // set the value of the data field
@@ -178,7 +180,7 @@
             }
             set
             {
-                if (string.IsNullOrWhiteSpace(value)) // if the value is null or whitespace
+                if (Utilities.IsNullEmptyOrWhiteSpace(value)) // if the value is null or whitespace
                 {
                     throw new System.ArgumentException("Birth place cannot be null or whitespace", nameof(value));
                 }
@@ -197,7 +199,7 @@
             }
             set
             {
-                if (value <= 0)
+                if (Utilities.IsZeroOrNegative(value))
                 {
                     throw new System.ArgumentException("Height cannot be negative", nameof(value));
                 }
@@ -216,9 +218,9 @@
             }
             set
             {
-                if (value <= 0)
+                if (!Utilities.IsPositive(value))
                 {
-                    throw new System.ArgumentException("Weight cannot be negative", nameof(value));
+                    throw new System.ArgumentException("Weight cannot be negative");
                 }
                 _weightInPounds = value;
             }
@@ -241,9 +243,9 @@
                 }
                 else
                 {
-                    if (value.Year < 1900 || value.Year > DateTime.Now.Day)
+                    if (value > DateOnly.FromDateTime(DateTime.Now)) // if the date of birth is in the future
                     {
-                        throw new System.ArgumentException("Date of birth cannot be before 1900 or future", nameof(value));
+                        throw new System.ArgumentException("Date of birth cannot be in the future", nameof(value));
                     }
                 }
                 _dateOfBirth = value;
@@ -303,7 +305,7 @@
             }
             set
             {
-                if (string.IsNullOrWhiteSpace(value)) // if the value is null or whitespace
+                if (Utilities.IsNullEmptyOrWhiteSpace(value)) // if the value is null or whitespace
                 {
                     throw new System.ArgumentException("Last name cannot be null or whitespace", nameof(value));
                 }
