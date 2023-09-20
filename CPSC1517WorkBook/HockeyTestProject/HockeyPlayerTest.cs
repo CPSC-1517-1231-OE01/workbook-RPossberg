@@ -5,6 +5,28 @@ namespace Hockey.Test
 {
     public class HockeyPlayerTest
     {
+        public interface IExampleInterface
+        {
+            void DoSomething();
+        }
+
+        public class ExampleClass : IExampleInterface
+        {
+            public void DoSomething()
+            {
+                Console.WriteLine("Doing something");
+            }
+        }
+
+        public class Program
+        {
+            static void Main(string[] args)
+            {
+                IExampleInterface example = new ExampleClass();
+                example.DoSomething();
+            }
+        }
+
         public HockeyPlayer GenerateTestPlayer()
 
         {
@@ -18,9 +40,11 @@ namespace Hockey.Test
             //    int a = 1;
             //    int b = 2;
             //    int actual;
-            HockeyPlayer player = GenerateTestPlayer();
+            HockeyPlayer player = GenerateTestPlayer(); // return new HockeyPlayer();
+
             const string NAME = "test";
-            player.FirstName = NAME; // return new HockeyPlayer();
+            // return new HockeyPlayer();
+
 
             //    // Act
             //    actual = a + b;
@@ -43,6 +67,7 @@ namespace Hockey.Test
 
             // Act
             Action act = () => player.FirstName = EMPTY_NAME;
+
 
             // Assert
             act.Should().Throw<ArgumentException>().WithMessage("First name cannot be null or whitespace.");

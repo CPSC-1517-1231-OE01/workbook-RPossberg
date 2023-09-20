@@ -26,6 +26,11 @@ namespace Hockey.Data
         private DateOnly _dateOfBirth;
         private int _heightInInches;
         private int _weightInPounds;
+
+        public HockeyPlayer()
+        {
+        }
+
         // We don't need to declare the data fields for Position and Shot because they are enums
         // private Position _position = Position.Center;
         // private Shot _shot = Shot.Left;
@@ -60,25 +65,25 @@ namespace Hockey.Data
         /// <summary>
         /// Creates a new (default) instance of a HockeyPlayer
         /// </summary>
-        public HockeyPlayer()
-        {
-            // Constructor body:
-            // a) If empty: the C# compiler will initialize all data fields to their default values
-            // b) You can provide literal values to initialize the data fields/properties with this constructor
+        //public HockeyPlayer()
+        //{
+        //    // Constructor body:
+        //    // a) If empty: the C# compiler will initialize all data fields to their default values
+        //    // b) You can provide literal values to initialize the data fields/properties with this constructor
 
-            // Ensure that you assign values that would pass any validation rules you have implemented for mutators,
-            // or better yet, assign to the properties to set the values to make use of validation rules directly - avoids duplication of validation logic in the constructor method(s)
+        //    // Ensure that you assign values that would pass any validation rules you have implemented for mutators,
+        //    // or better yet, assign to the properties to set the values to make use of validation rules directly - avoids duplication of validation logic in the constructor method(s)
 
-            // You may want to code validation logic in the constructor(s) if you have implemented a readonly property or if the data member has only a private set.
-            _firstName = string.Empty;
-            _lastName = string.Empty;
-            _birthPlace = string.Empty;
-            _dateOfBirth = new DateOnly(1900, 1, 1);
-            _heightInInches = 0;
-            _weightInPounds = 0;
-            Position = Position.Center;
-            Shot = Shot.Left;
-        }
+        //    // You may want to code validation logic in the constructor(s) if you have implemented a readonly property or if the data member has only a private set.
+        //    _firstName = string.Empty;
+        //    _lastName = string.Empty;
+        //    _birthPlace = string.Empty;
+        //    _dateOfBirth = new DateOnly(1900, 1, 1);
+        //    _heightInInches = 0;
+        //    _weightInPounds = 0;
+        //    Position = Position.Center;
+        //    Shot = Shot.Left;
+        //}
 
         // Parameterized constructor (greedy constructor)
         /// <summary>
@@ -150,7 +155,7 @@ namespace Hockey.Data
                 // The return has a syntax of return expression
                 return _firstName; // return the value of the data field
             }
-            set // init is a new keyword in C# 9.0
+            private set // init is a new keyword in C# 9.0
             {
                 // Mutator
                 // The set block will assign a value to the associated data field,
@@ -163,6 +168,7 @@ namespace Hockey.Data
                 {
                     throw new System.ArgumentException("First name cannot be null or whitespace.");
                 }
+
                 // If we get here, the value is valid and we can assign to the data field
                 _firstName = value; // set the value of the data field
             }
@@ -178,7 +184,7 @@ namespace Hockey.Data
             {
                 return _birthPlace; // return the value of the data field
             }
-            set
+            private set
             {
                 if (Utilities.IsNullEmptyOrWhiteSpace(value)) // if the value is null or whitespace
                 {
@@ -197,7 +203,7 @@ namespace Hockey.Data
             {
                 return _heightInInches;
             }
-            set
+            private set
             {
                 if (Utilities.IsZeroOrNegative(value))
                 {
@@ -216,7 +222,7 @@ namespace Hockey.Data
             {
                 return _weightInPounds;
             }
-            set
+            private set
             {
                 if (!Utilities.IsPositive(value))
                 {
@@ -235,7 +241,7 @@ namespace Hockey.Data
             {
                 return _dateOfBirth;
             }
-            set
+            private set
             {
                 if (value == null)
                 {
@@ -303,7 +309,7 @@ namespace Hockey.Data
             {
                 return _lastName; // return the value of the data field
             }
-            set
+            private set
             {
                 if (Utilities.IsNullEmptyOrWhiteSpace(value)) // if the value is null or whitespace
                 {
@@ -311,7 +317,15 @@ namespace Hockey.Data
                 }
                 _lastName = value; // set the value of the data field
             }
-        }
+        } // end of property
 
+        // Override of ToString() method
+        // Syntax: access_modifier override return_type method_name (parameter_list) { code block }
+        public override string ToString()
+        {
+            //return base.ToString();
+            //return $"{FirstName} {LastName}"; // string interpolation
+            return $"{LastName}, {FirstName}"; // string interpolation
+        }
     }
 }
