@@ -16,73 +16,74 @@ namespace Hockey.Data
         // 3. Constructors
         // 4. Methods (functions)
 
-        // data fields
+        // Data fields
         // are storage areas in the class for data
         // these are treated as variables
         // they may be public, private, or public readonly
+
         private string _firstName;
         private string _lastName;
-        private string _birthPlace;
         private DateOnly _dateOfBirth;
-        private int _heightInInches;
         private int _weightInPounds;
-
-        public HockeyPlayer()
-        {
-        }
-
-        // We don't need to declare the data fields for Position and Shot because they are enums
+        private int _heightInInches;
+        private int _jerseyNumber;
+        // The following are unnecessary as enums are used
         // private Position _position = Position.Center;
-        // private Shot _shot = Shot.Left;
-        //private Position _position;
-        //private Shot _shot;
+        // private Shot _shot;
+        private string _birthPlace;
 
         // Constructor
-        // is a method that is called when an instance of the class is created used to initialize an instance of the class.
-        // it has the same name as the class
-        // The result purpose for implementing a constructor is to ensure that when an instance of the class is created, it is created in a known and valid state. 
-        // If a constructor is not implemented, the compiler will create a default constructor that will initialize all data fields to their default values.
-
-        // If your class definition has NO explicit constructors, the compiler will create a default constructor that initializes all data fields to their default values.
-        // If your class definition has one or more explicit constructors, the compiler will NOT create a default constructor.
-        // If you want a default constructor, you must implement it yourself.
-        // If you code a constructor for the class, you are responsible for coding all constructors for the class.
-        // (i.e. only the ones you create are valid)
-        // If you are going to code your own constructor(s), you will likely code the following two constructors:
-        // 1. Default constructor
-        // 2. Parameterized (Greedy) constructor - a constructor that accepts a parameter for each data field in the class
-        // A parameterized constructor is sometimes referred to as a greedy constructor. This is because it takes one or more  parameters when creating an instance of a class. The parameters are used to set the initial state of the object. The term "greedy" refers to the fact that the constructor requires more information (parameters) at initialization time than other types of constructors.
+        // Constructors are used to initialize an instance of the class.
+        // The result purpose for implementing a constructor is to ensure that the data
+        // fields are in a known and valid state.
         //
-        // Syntax: access modifier class_name (parameter_list) { code block }
+        // If your class definition has NO explicit constructor included, the data fields
+        //   and/or auto-implemented properties are set to the default C# data type value
+        // You can code one or more constructors (overloading) in the class definition
+        // If you code a constructor for the class, you are responsible for all constructors
+        //   used by the class (i.e. only the ones you create are valid)
+        // If you are going to code your own constructor(s) you will likely code the following
+        //   two:
+        //   1) Default: this constructor does not accept any parameters
+        //   2) Greedy: this constructor defines a list of parameters, one for each 
+        //      property
         //
-        // IMPORTANT: Constructors do not have a return data type (not even void)
-        //            You do not call a constructor directly.
-        //            It is called when you create an instance of the class preceded by the "new" operator.
-        //            E.g. HockeyPlayer hp = new HockeyPlayer(...);
+        // Syntax: access class name([list of parameters]) { code block }
+        //
+        // IMPORTANT: Constructors do not have a return type
+        //            You do not call a constructor directly, must be preceded by the 
+        //            "new" operator
+        //            E.g. HockeyPlayer player = new HockeyPlayer(...)
 
         // Constructors:
         // Default constructor
-        /// <summary>
-        /// Creates a new (default) instance of a HockeyPlayer
-        /// </summary>
+        // ===================================================================
+        // =               LEFT HERE FOR POSTERITY, NOT IN USE               =
+        // ===================================================================
+        ///// <summary>
+        ///// Creates a default instance of a HockeyPlayer
+        ///// </summary>
         //public HockeyPlayer()
         //{
-        //    // Constructor body:
-        //    // a) If empty: the C# compiler will initialize all data fields to their default values
-        //    // b) You can provide literal values to initialize the data fields/properties with this constructor
+        //    // Constructor body: 
+        //    // a) If empty: the C# defaults for each field will be assigned
+        //    // b) You can provide literal values to your fields/properties with this constructor
 
-        //    // Ensure that you assign values that would pass any validation rules you have implemented for mutators,
-        //    // or better yet, assign to the properties to set the values to make use of validation rules directly - avoids duplication of validation logic in the constructor method(s)
-
-        //    // You may want to code validation logic in the constructor(s) if you have implemented a readonly property or if the data member has only a private set.
+        //    // Ensure that you assign values that would pass any validation rules you set
+        //    // for property mutators, or better yet, assign to the properties to make use 
+        //    // of validation rules directly - avoid duplicating validation logic in the 
+        //    // constructor method(s)
+        //    //
+        //    // You may want to code validation logic in the constructor(s) if you have implemented
+        //    // a readonly property or if the data member has only a private set.
         //    _firstName = string.Empty;
         //    _lastName = string.Empty;
         //    _birthPlace = string.Empty;
-        //    _dateOfBirth = new DateOnly(1900, 1, 1);
-        //    _heightInInches = 0;
+        //    _dateOfBirth = new DateOnly();
         //    _weightInPounds = 0;
+        //    _heightInInches = 0;
+        //    Shot = Shot.Right;
         //    Position = Position.Center;
-        //    Shot = Shot.Left;
         //}
 
         // Parameterized constructor (greedy constructor)
@@ -94,25 +95,46 @@ namespace Hockey.Data
         /// <param name="lastName"></param>
         /// <param name="birthPlace"></param>
         /// <param name="dateOfBirth"></param>
-        /// <param name="heightInInches"></param>
         /// <param name="weightInPounds"></param>
+        /// <param name="heightInInches"></param>
+        /// <param name="jerseyNumber"></param>
         /// <param name="position"></param>
         /// <param name="shot"></param>
-        public HockeyPlayer(string firstName, string lastName, string birthPlace, DateOnly dateOfBirth, int heightInInches, int weightInPounds, Position position, Shot shot)
+        public HockeyPlayer(string firstName, string lastName, string birthPlace, DateOnly dateOfBirth,
+            int weightInPounds, int heightInInches, int jerseyNumber, Position position = Position.Center, Shot shot = Shot.Right)
         {
             // Constructor body:
             // a) A parameter for every property
-            // b) You COULD perform validation on the parameters here, but the properties already do it, so just use them.
-            // c) Validation for public readonly data members MUST be done here if not done in the property mutator.
-            // d) Validation for properties with a private set MUST be don here if not done in the property mutator.
+            // b) You COULD perform validation here, but he properties already do it, so just use them
+            // c) Validation for public readonly data members MUST be done here
+            // d) validation for properties with a private set MUST be done here
+            //    if not done in the property
             FirstName = firstName;
             LastName = lastName;
             BirthPlace = birthPlace;
             DateOfBirth = dateOfBirth;
-            HeightInInches = heightInInches;
             WeightInPounds = weightInPounds;
-            Position = position;
+            HeightInInches = heightInInches;
+            JerseyNumber = jerseyNumber;
             Shot = shot;
+            Position = position;
+        }
+
+        public int JerseyNumber
+        {
+            get
+            {
+                return _jerseyNumber;
+            }
+            set
+            {
+                if (value < 1 || value > 98)
+                {
+                    throw new System.ArgumentOutOfRangeException("Jersey number must be between 1 and 98",
+                    new ArgumentException());
+                }
+                _jerseyNumber = value;
+            }
         }
 
         // Properties 

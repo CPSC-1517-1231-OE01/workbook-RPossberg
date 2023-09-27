@@ -36,13 +36,25 @@
 
         public static bool IsPositive(decimal value) => value > 0M ? true : false; // true | false
 
+        // Date Validators
+        // ==============================================================================
+
         /// <summary>
-        /// Determines if a date is in the future, tomorrow or later
+        /// Tests for a DateTime in the future from now
         /// </summary>
         /// <param name="value"></param>
-        /// <returns></returns>
-        public static bool IsDateInFuture(DateOnly value) => value > DateOnly.FromDateTime(DateTime.Now);
-        public static bool IsDateInPast(DateOnly value) => value < DateOnly.FromDateTime(DateTime.Now);
+        /// <returns>True if value is in the future or now, false otherwise</returns>
+        public static bool IsDateInFuture(DateTime value) => value >= DateTime.Now;
+
+        /// <summary>
+        /// Tests for a DateOnly in the future from now
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>
+        /// True if value is in the future excluding today, false otherwise
+        /// </returns>
+        public static bool IsDateInFuture(DateOnly value) =>
+            value > DateOnly.FromDateTime(DateTime.Now);
 
     }
 }

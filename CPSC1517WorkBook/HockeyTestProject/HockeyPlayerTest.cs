@@ -1,91 +1,105 @@
 using FluentAssertions;
 using Hockey.Data;
+using System.Collections;
 
 namespace Hockey.Test
 {
     public class HockeyPlayerTest
     {
-        public interface IExampleInterface
+        // Constants for a test player
+        const string FirstName = "Conner";
+        const string LastName = "Brown";
+        const string BirthPlace = "Toronto, ON, CAN";
+        const int HeightInInches = 72;
+        const int WeightInPounds = 188;
+        const int JerseyNumber = 28;
+        const Position PlayerPosition = Position.Center;
+        const Shot PlayerShot = Shot.Left;
+        // The following relies on our being correct here - not writing a test for the test expected value
+        static readonly DateOnly DateOfBirth = new DateOnly(1994, 01, 14);
+        const string ToStringValue = $"{FirstName} {LastName}";
+        readonly int Age = (DateOnly.FromDateTime(DateTime.Now).DayNumber - DateOfBirth.DayNumber) / 365;
+
+        //! [Fact]
+        //public void Age_IsCorrect()
+        //{
+        //    Age.Should().Be(29);
+        //TODO: Fix this test
+
+        public HockeyPlayer CreateTestHockeyPlayer()
         {
-            void DoSomething();
+            return new HockeyPlayer(FirstName, LastName, BirthPlace, DateOfBirth, HeightInInches, WeightInPounds, JerseyNumber, PlayerPosition, PlayerShot);
         }
 
-        public class ExampleClass : IExampleInterface
+
+        // Test data generator for class data
+        private class BadHockeyPlayerTestDataGenerator : IEnumerable<object[]>
         {
-            public void DoSomething()
+            private readonly List<object[]> _data = new List<object[]>
             {
-                Console.WriteLine("Doing something");
-            }
+                // First Name tests
+                new object[]{"", LastName, BirthPlace, DateOfBirth, HeightInInches, WeightInPounds, JerseyNumber, PlayerPosition, PlayerShot, "First name cannot be null or empty." },
+                new object[]{" ", LastName, BirthPlace, DateOfBirth, HeightInInches, WeightInPounds, JerseyNumber, PlayerPosition, PlayerShot, "First name cannot be null or empty." },
+                new object[]{null, LastName, BirthPlace, DateOfBirth, HeightInInches, WeightInPounds, JerseyNumber, PlayerPosition, PlayerShot, "First name cannot be null or empty." },
+
+                // TODO: complete remaining private set tests
+            };
+
+            public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
+
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
-        public class Program
+        // valid jersey number 1 - 98
+        [Theory]
+        [InlineData(1)]
+        [InlineData(98)]
+        public void HockeyPlayer_JerseyNumber_GoodSetAndGet(int value)
         {
-            static void Main(string[] args)
-            {
-                IExampleInterface example = new ExampleClass();
-                example.DoSomething();
-            }
+            HockeyPlayer player = CreateTestHockeyPlayer();
+            int actual;
+
+            player.JerseyNumber = value;
+            actual = player.JerseyNumber;
+
+            actual.Should().Be(value);
         }
 
-        public HockeyPlayer GenerateTestPlayer()
-
+        // invalid jersey number < 1 || > 98
+        [Theory]
+        [InlineData(0)]
+        [InlineData(99)]
+        public void HockeyPlayer_JerseyNumber_BadSet(int value)
         {
-            return new HockeyPlayer();
+            HockeyPlayer player = CreateTestHockeyPlayer();
+
+            Action act = () => player.JerseyNumber = value;
+
+            act.Should().Throw<ArgumentOutOfRangeException>().WithMessage("Jersey Number must be between 1 and 98");
         }
 
-        [Fact] // This is an attribute
-        public void HockeyPlayer_FirstName_ReturnsGoodFirstName()
+        [Fact]
+        public void HockeyPlayer_Age_ReturnsCorrectValue()
         {
-            //    // Arrange
-            //    int a = 1;
-            //    int b = 2;
-            //    int actual;
-            HockeyPlayer player = GenerateTestPlayer(); // return new HockeyPlayer();
+            HockeyPlayer player = CreateTestHockeyPlayer();
+            int actual;
 
-            const string NAME = "test";
-            // return new HockeyPlayer();
+            actual = player.Age;
 
+            actual.Should().Be(Age);
+        }
 
-            //    // Act
-            //    actual = a + b;
-            string actual = player.FirstName; // return new HockeyPlayer();
-            actual.Should().Be("test"); // FluentAssertions
+        [Fact]
 
-
-            //    // Assert
-            //    actual.Should().Be(3); // FluentAssertions
-            actual.Should().Be(NAME);
-        } // end of Test1
-
-        [Fact] // This is an attribute
-
-        public void HockeyPlayer_FirstName_ThrowExceptionForEmptyArg()
+        public void HockeyPlayer_ToString_ReturnsCorrectValue()
         {
-            // Arrange
-            HockeyPlayer player = GenerateTestPlayer();
-            const string EMPTY_NAME = "";
+            HockeyPlayer player = CreateTestHockeyPlayer();
+            string actual;
 
-            // Act
-            Action act = () => player.FirstName = EMPTY_NAME;
+            actual = player.ToString();
 
-
-            // Assert
-            act.Should().Throw<ArgumentException>().WithMessage("First name cannot be null or whitespace.");
-
-        } // end of Test1
-
-
-
-        //Arrange
-        // int a = 1;
-        // int b = 2;
-        // int actual;
-        // return new HockeyPlayer();
-
-        //Assert
-        // Assert.Equal(3, actual); // xUnit
-        // actual.Should().Be(3); // FluentAssertions
-
+            actual.Should().Be(ToStringValue);
+        }
 
     } // end of Test1
 } // end of class

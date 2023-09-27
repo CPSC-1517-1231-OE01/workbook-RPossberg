@@ -1,4 +1,5 @@
 ﻿using Hockey.Data;
+using Utils;
 
 Console.WriteLine("Welcome to the HockeyPlayer Test App");
 
@@ -15,11 +16,14 @@ Console.WriteLine("Welcome to the HockeyPlayer Test App");
 //};
 
 // greedy 
-HockeyPlayer player3 = new HockeyPlayer("Bobby", "Orr", "Parry Sound, ON", new DateOnly(1948, 3, 20),
-    196, 73, Position.Defense, Shot.Right);
+HockeyPlayer player2 = new HockeyPlayer("Bobby", "Orr", "Parry Sound, ON", new DateOnly(1948, 3, 20),
+    196, 73, 28, Position.Defense, Shot.Right);
 
-// output things about the players
-//Console.WriteLine($"The player's name is {player1.FirstName} {player1.LastName} and they are born {player1.DateOfBirth}.");
-//Console.WriteLine($"The player's name is {player2.FirstName} {player2.LastName} and they are born {player2.DateOfBirth}.");
-Console.WriteLine(player3);
-Console.WriteLine($"The player's name is {player3.FirstName} {player3.LastName} and they are born {player3.DateOfBirth}.");
+// Testing overloaded IsInTheFuture
+Console.WriteLine($"Date in future? {Utilities.IsDateInFuture(new DateTime(2023, 9, 12))}");
+
+// Everything but the Age can be done day one of week two
+// Console.WriteLine($"The player's name is {player1.ToString()}, they are born {player1.DateOfBirth} and are {player1.Age} years old.");
+// Call to .ToString() is unnecessary, using the variable in this context will automatically call ToString()
+Console.WriteLine($"The player's name is {player2}, they are born {player2.DateOfBirth} and are {player2.Age} years old.");
+// Console.WriteLine($"The player's name is {player3}, they are born {player3.DateOfBirth} and are {player3.Age} years old.");
