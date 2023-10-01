@@ -1,38 +1,8 @@
-﻿namespace UnitTestPracticeActivity
+﻿namespace ObjectClassLibrary
 {
-    //Intro
-    /// <summary>
-    /// In this activity we will write a Unit Test class to test a BodyMassIndex class coded by someone else.
-    /// We will then fix all the errors in the existing BodyMassIndex class until all the test cases pass
-    /// </summary>
-    ///
-    /// <para> Compute the BMI based on the weight (in pounds) and height (in inches)
-    ///* Based on the following formula:
-    /// BMI = (weight / (height * height)) * 703
-    /// 
-    /// The BMI Categories:
-    ///
-    /// Classification:  BMI Category:  Risk of developing health problems:
-    /// underweight    <18.5          Increased
-    /// normal         18.5 - 24.9    Least
-    /// overweight     25.0 - 29.9    Increased
-    /// obese        >=30.0           High
-    ///
-    /// Software developer Jack has created the following class model to compute the BMI
-    ///
-    /// Fields:  _height: double
-    ///          _weight: double
-    ///
-    /// Properties: Height { get; set; } : double
-    ///             Name { get; set; } : string
-    ///             Weight { get; set; } : double
-    ///
-    /// Methods: Bmi() : double
-    ///          BmiCategory() : string
-    ///          BodyMassIndex(string name, double weight, double height) : constructor
-    /// /para>
     public class BodyMassIndex
     {
+        //? Copy of Jack's code
 
         // Fields
         // ==============================================================================
@@ -140,4 +110,3 @@
         }
     }
 }
-
