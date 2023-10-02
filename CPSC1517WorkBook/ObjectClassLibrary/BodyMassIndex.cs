@@ -1,4 +1,7 @@
-﻿namespace ObjectClassLibrary
+﻿// Ignore Spelling: Bmi
+
+
+namespace ObjectClassLibrary
 {
     public class BodyMassIndex
     {
@@ -6,6 +9,7 @@
 
         // Fields
         // ==============================================================================
+
         private double _weight;
         private double _height;
 
@@ -17,7 +21,9 @@
         {
             get
             {
-                return _height;
+                // Fix: This should be _weight
+                //return _height;
+                return _weight;
             }
 
             set
@@ -51,8 +57,12 @@
         // ==============================================================================
         public BodyMassIndex(string name, double weight, double height)
         {
-            if (string.IsNullOrWhiteSpace(name))
+            // FIX: Incorrect condition, must NOT be empty
+            //if (string.IsNullOrWhiteSpace(name))
+            if (!string.IsNullOrEmpty(name))
             {
+                // Fix: This won't work because the param is assigned to param
+                //name = name;
                 Name = name;
             }
             else
@@ -60,7 +70,9 @@
                 throw new ArgumentNullException("Name cannot be null, empty, or whitespace");
             }
             this.Weight = weight;
-            height = this.Height;
+            // Fix: Reversed propery and param
+            //height = this.Height;
+            this.Height = height;
         }
 
         /// <summary>

@@ -1,5 +1,4 @@
 // Ignore Spelling: Bmi
-
 using FluentAssertions;
 using ObjectClassLibrary;
 
