@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HockeyTestProject", "Hockey
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyUtilitiesTestProject", "MyUtilitiesTestProject\MyUtilitiesTestProject.csproj", "{87642455-76D2-40C4-99FA-EB0737A655CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectClassLibrary", "ObjectClassLibrary\ObjectClassLibrary.csproj", "{879168B3-5BBB-498B-9F83-64C1A0947567}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObjectClassLibrary", "ObjectClassLibrary\ObjectClassLibrary.csproj", "{879168B3-5BBB-498B-9F83-64C1A0947567}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectClassLibraryTest", "ObjectClassLibraryTest\ObjectClassLibraryTest.csproj", "{2212216D-DE96-4516-855A-A6C04CFEA006}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObjectClassLibraryTest", "ObjectClassLibraryTest\ObjectClassLibraryTest.csproj", "{2212216D-DE96-4516-855A-A6C04CFEA006}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSampleApp1", "BlazorSampleApp1\BlazorSampleApp1.csproj", "{61740AFE-D86E-433D-8676-0E1C25B5C895}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{2212216D-DE96-4516-855A-A6C04CFEA006}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2212216D-DE96-4516-855A-A6C04CFEA006}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2212216D-DE96-4516-855A-A6C04CFEA006}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61740AFE-D86E-433D-8676-0E1C25B5C895}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61740AFE-D86E-433D-8676-0E1C25B5C895}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61740AFE-D86E-433D-8676-0E1C25B5C895}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61740AFE-D86E-433D-8676-0E1C25B5C895}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
