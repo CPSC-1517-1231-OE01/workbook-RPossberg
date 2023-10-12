@@ -70,7 +70,7 @@ namespace ObjectClassLibrary
                 throw new ArgumentNullException("Name cannot be null, empty, or whitespace");
             }
             this.Weight = weight;
-            // Fix: Reversed propery and param
+            // Fix: Reversed property and param
             //height = this.Height;
             this.Height = height;
         }

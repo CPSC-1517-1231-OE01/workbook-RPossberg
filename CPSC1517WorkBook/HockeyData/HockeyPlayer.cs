@@ -105,7 +105,7 @@ namespace Hockey.Data
         {
             // Constructor body:
             // a) A parameter for every property
-            // b) You COULD perform validation here, but he properties already do it, so just use them
+            // b) You COULD perform validation here, but the properties already do it, so just use them
             // c) Validation for public readonly data members MUST be done here
             // d) validation for properties with a private set MUST be done here
             //    if not done in the property
@@ -346,8 +346,8 @@ namespace Hockey.Data
         public override string ToString()
         {
             //return base.ToString();
-            //return $"{FirstName} {LastName}"; // string interpolation
-            return $"{LastName}, {FirstName}"; // string interpolation
+            //x return $"{LastName} {FirstName}"; // string interpolation
+            return $"{FirstName} {LastName}"; // string interpolation
         }
     }
 }

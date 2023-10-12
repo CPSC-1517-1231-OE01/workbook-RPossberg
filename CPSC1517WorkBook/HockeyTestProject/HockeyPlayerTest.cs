@@ -42,7 +42,7 @@ namespace Hockey.Test
                 new object[]{" ", LastName, BirthPlace, DateOfBirth, HeightInInches, WeightInPounds, JerseyNumber, PlayerPosition, PlayerShot, "First name cannot be null or empty." },
                 new object[]{null, LastName, BirthPlace, DateOfBirth, HeightInInches, WeightInPounds, JerseyNumber, PlayerPosition, PlayerShot, "First name cannot be null or empty." },
 
-                // TODO: complete remaining private set tests
+                //x TODO: complete remaining private set tests
             };
 
             public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
