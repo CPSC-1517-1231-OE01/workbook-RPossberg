@@ -1,4 +1,5 @@
-﻿using Utils;
+﻿using System.Globalization;
+using Utils;
 
 namespace Hockey.Data
 {
@@ -120,104 +121,131 @@ namespace Hockey.Data
             Position = position;
         }
 
-        public int JerseyNumber
-        {
-            get
-            {
-                return _jerseyNumber;
-            }
-            set
-            {
-                if (value < 1 || value > 98)
-                {
-                    throw new System.ArgumentOutOfRangeException("Jersey number must be between 1 and 98",
-                    new ArgumentException());
-                }
-                _jerseyNumber = value;
-            }
-        }
-
-        // Properties 
-        // These are access techniques to retrieve and/or modify the data in the class data fields
-        // without directly 'touching' the data fields
+        // Property
+        // these are access techniques to retrieve or set data in
+        // the class without directly 'touching' the storage data field
         // allows for protection of data field
 
         // A property is associated with a single instance of data
         // A property is public so it can be accessed outside the class
-        // A property MUST have a get and/or MAY have a set accessor
-        // - if no 'set' is present, the property is readonly, which is commonly used for derived data of the class.
-        // - the set can be either public or private
-        //      public: user can alter contents of the data field
-        //      private: only code within the class can alter contents
-        // A property MAY use init in place of a set. The init keyword will ensure that the property can only be set
-        // during object initialization. Once the object is initialized, the property can no longer be updated, enforcing immutability.
+        // A property MUST have a 'get'
+        // A property MAY have a 'set'
+        // - if no 'set' is present, the property cannot be modified;
+        //   it is effectively readonly, which is commonly used for derived data of
+        //   the class
+        // - the set can be either public or privte
+        //     public: user can alter contents
+        //     private: only code within the class can alter contents
+        // A property MAY use init in place of set. The init keyword will ensure
+        //   that the property can only be set during object construction (i.e. in the 
+        //   constructor). The property can never again be updated, enforcing immuatibility.
 
         // Fully-implemented property
-        // a) a declared storage area (data field) for the data
-        // b) a declared property signature access type name (get and set).
-        // c) a declared (get) method: public accessor that returns the data field
-        // d) an optional declared mutator (set) method: public or private accessor that assigns a value to the data field
-        //  - if the set is private, it can only be used in a constructor or other method within the class
+        // a) a declared storage area (data field)
+        // b) a declared property signature (access type name)
+        // c) a coded accessor (get) method: public
+        // d) an optional coded mutator (set) method: public or private
+        //    if the set is private, it can only be used in a constructor or other method
 
         // When to use:
-        // 1. When you want to validate the data being assigned to the data field (incoming data)
-        // 2. If you are storing the data in an explicitly declared data field
-        // 3. If you are creating a property that generates output based on other sources within the class (readonly property);
-        //    this property would ONLY have an accessor (get).
-
+        // a) if you are storing the data in an explicitly declared data field
+        // b) if you are doing validation on incoming data
+        // c) if you are creating a property that generates output based on other sources
+        //    within the class (readonly property); this property would ONLY have an
+        //    accessor (get)
         /// <summary>
-        /// Represents the player's first name
+        /// Represents a hockey player's first name
         /// </summary>
         public string FirstName
         {
             get
             {
                 // Accessor
-                // The get block will return the contents of the associated data field
-                // The return has a syntax of return expression
-                return _firstName; // return the value of the data field
+                // The get block will return teh contents of the associated data field
+                // The return has syntax of return expression
+                return _firstName;
             }
-            private set // init is a new keyword in C# 9.0
+            private set
             {
                 // Mutator
-                // The set block will assign a value to the associated data field,
-                // receives an incoming "value" and places it into the associated data field
-                // During the set, you can perform validation on the incoming data
-                // During the set, you may also want to perform some logical processing on the incoming data to set another field.
+                // The set block receives an incoming "value" and places it into the associated field
+                // During the set, you can perform validation on the incoming value
+                // During the set, you may also want to perform some logical processing using the value  
+                //    to set another field
 
-                // Ensure the incoming value is not null, empty or whitespace (invalid values)
-                if (Utilities.IsNullEmptyOrWhiteSpace(value)) // if the value is null or whitespace
+                // Ensure the incoming value is not null, empty, or whitespace (invalid values)
+                if (Utilities.IsNullEmptyOrWhiteSpace(value))
                 {
-                    throw new System.ArgumentException("First name cannot be null or whitespace.");
+                    throw new ArgumentException($"First name cannot be null or empty.");
                 }
 
-                // If we get here, the value is valid and we can assign to the data field
-                _firstName = value; // set the value of the data field
+                // If we get here, the value is "good" and we can assign to the data field
+                _firstName = value;
             }
-        } // end of property
-
+        }
 
         /// <summary>
-        /// Represents the player's birth place
+        /// Represents a hockey player's last name
+        /// </summary>
+        public string LastName
+        {
+            get
+            {
+                return _lastName;
+            }
+            private set
+            {
+                if (Utilities.IsNullEmptyOrWhiteSpace(value))
+                {
+                    throw new ArgumentException($"Last name cannot be null or empty.");
+                }
+
+                _lastName = value;
+            }
+        }
+
+        /// <summary>
+        /// Represents a hockey player's place of birth
         /// </summary>
         public string BirthPlace
         {
             get
             {
-                return _birthPlace; // return the value of the data field
+                return _birthPlace;
             }
             private set
             {
-                if (Utilities.IsNullEmptyOrWhiteSpace(value)) // if the value is null or whitespace
+                if (Utilities.IsNullEmptyOrWhiteSpace(value))
                 {
-                    throw new System.ArgumentException("Birth place cannot be null or whitespace", nameof(value));
+                    throw new ArgumentException($"Birth place cannot be null or empty.");
                 }
-                _birthPlace = value; // set the value of the data field
+
+                _birthPlace = value;
             }
         }
 
         /// <summary>
-        /// Represents the player's height in inches
+        /// Represents a hockey player's date of birth
+        /// </summary>
+        public DateOnly DateOfBirth
+        {
+            get
+            {
+                return _dateOfBirth;
+            }
+            private set
+            {
+                if (Utilities.IsDateInFuture(value))
+                {
+                    throw new ArgumentException($"Date of birth cannot be in the future.");
+                }
+
+                _dateOfBirth = value;
+            }
+        }
+
+        /// <summary>
+        /// Represents a hockey player's height in inches
         /// </summary>
         public int HeightInInches
         {
@@ -229,8 +257,9 @@ namespace Hockey.Data
             {
                 if (Utilities.IsZeroOrNegative(value))
                 {
-                    throw new System.ArgumentException("Height cannot be negative", nameof(value));
+                    throw new ArgumentException($"Height must be positive.");
                 }
+
                 _heightInInches = value;
             }
         }
@@ -248,37 +277,12 @@ namespace Hockey.Data
             {
                 if (!Utilities.IsPositive(value))
                 {
-                    throw new System.ArgumentException("Weight cannot be negative");
+                    throw new ArgumentException($"Weight must be positive.");
                 }
                 _weightInPounds = value;
             }
         }
 
-        /// <summary>
-        /// Represents the player's date of birth
-        /// </summary>
-        public DateOnly DateOfBirth
-        {
-            get
-            {
-                return _dateOfBirth;
-            }
-            private set
-            {
-                if (value == null)
-                {
-                    throw new System.ArgumentException("Date of birth cannot be null", nameof(value));
-                }
-                else
-                {
-                    if (value > DateOnly.FromDateTime(DateTime.Now)) // if the date of birth is in the future
-                    {
-                        throw new System.ArgumentException("Date of birth cannot be in the future", nameof(value));
-                    }
-                }
-                _dateOfBirth = value;
-            }
-        }
 
         // Auto-implemented properties - using an enum so no validation is necessary
         // These properties differ only in syntax from the fully-implemented properties above
@@ -325,29 +329,103 @@ namespace Hockey.Data
         /// <summary>
         /// Represents the player's last name
         /// </summary>
-        public string LastName
+        public int JerseyNumber
         {
             get
             {
-                return _lastName; // return the value of the data field
+                return _jerseyNumber;
             }
-            private set
-            {
-                if (Utilities.IsNullEmptyOrWhiteSpace(value)) // if the value is null or whitespace
-                {
-                    throw new System.ArgumentException("Last name cannot be null or whitespace", nameof(value));
-                }
-                _lastName = value; // set the value of the data field
-            }
-        } // end of property
 
-        // Override of ToString() method
-        // Syntax: access_modifier override return_type method_name (parameter_list) { code block }
+            set
+            {
+                if (value < 1 || value > 98)
+                {
+                    throw new ArgumentException("Jersey number must be between 1 and 98.");
+                }
+
+                _jerseyNumber = value;
+            }
+        }
+
+        // Behaviours (aka methods)
+        // A behaviour is any method in your class
+        // Behaviours can be private (for use by the classonly); publoic (for use by the outside user)
+        // All rules about methods are in effect
+
+        // A special method may be placed in the class to reflect the data stored by the 
+        // instance (object) based on this class definition (ToString)
+        // This method is part fo the system software and can be overridden by your own version of the method
+        /// <summary>
+        /// The string representation of a hockey player object
+        /// </summary>
+        /// <returns>A string including the player's first and last name</returns>
         public override string ToString()
         {
-            //return base.ToString();
-            //x return $"{LastName} {FirstName}"; // string interpolation
-            return $"{FirstName} {LastName}"; // string interpolation
+            return $"{FirstName},{LastName},{JerseyNumber},{Position},{Shot},{HeightInInches},{WeightInPounds},{DateOfBirth.ToString("MMM-dd-yyyy", CultureInfo.InvariantCulture)},{BirthPlace.Replace(", ", "-")}";
         }
+
+        /// <summary>
+        /// Parses a CSV line into a new hockey player
+        /// </summary>
+        /// <param name="line">The CSV line to parse</param>
+        /// <returns>A new hockey player</returns>
+        /// <exception cref="InvalidDataException">If the number of fields in the line does not match the
+        /// number required for a new hockey player</exception>
+        /// <exception cref="ArgumentNullException">If the line is empty or null</exception>
+        /// <exception cref="FormatException">If the line could not be parsed</exception>
+        public static HockeyPlayer Parse(string line)
+        {
+            HockeyPlayer player;
+
+            // Validate
+            if (string.IsNullOrWhiteSpace(line))
+            {
+                throw new ArgumentNullException("Line cannot be null or empty.", new ArgumentException());
+            }
+
+            // Split on commas that are not within double-quoted strings
+            string[] fields = line.Split(',');
+
+            if (fields.Length != 9)
+            {
+                throw new InvalidDataException("Incorrect number of fieds.");
+            }
+
+            try
+            {
+                player = new HockeyPlayer(fields[0], fields[1], fields[8], DateOnly.ParseExact(fields[7], "MMM-dd-yyyy", CultureInfo.InvariantCulture),
+                    int.Parse(fields[6]), int.Parse(fields[5]), int.Parse(fields[2]),
+                    Enum.Parse<Position>(fields[3]), Enum.Parse<Shot>(fields[4]));
+            }
+            catch
+            {
+                throw new FormatException($"Error parsing line {line}.");
+            }
+
+            return player;
+        }
+
+        /// <summary>
+        /// Parses a CSV line into a new Hockey player (out param)
+        /// </summary>
+        /// <param name="line">The CSV line to parse</param>
+        /// <param name="player">The new Hockey player</param>
+        /// <returns>True if the parse was successful, false otherwise</returns>
+        public static bool TryParse(string line, out HockeyPlayer? player)
+        {
+            bool isParsed = false;
+            try
+            {
+                player = HockeyPlayer.Parse(line);
+                isParsed = true;
+            }
+            catch
+            {
+                player = null;
+            }
+
+            return isParsed;
+        }
+
     }
 }

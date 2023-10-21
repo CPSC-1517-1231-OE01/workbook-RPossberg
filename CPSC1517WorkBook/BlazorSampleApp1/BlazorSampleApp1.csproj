@@ -7,4 +7,8 @@
     <SqlQueryToolsConnectionString />
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HockeyData\HockeyData.csproj" />
+  </ItemGroup>
+
 </Project>

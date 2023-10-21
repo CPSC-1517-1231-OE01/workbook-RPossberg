@@ -1,0 +1,20 @@
+﻿@page "/form-controls"
+
+<HeadContent>
+    <link href="/css/styles.css" rel="stylesheet" />
+</HeadContent>
+
+<h3>Form Controls And Styling Demo</h3>
+
+@if (ReceivedData != null)
+{
+    <div class="alert alert-info:">
+        @ReceivedData
+    </div>
+}
+
+
+@code {
+    private string? ReceivedData;
+
+}

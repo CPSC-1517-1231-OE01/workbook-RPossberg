@@ -17,8 +17,9 @@ namespace Hockey.Test
         const Shot PlayerShot = Shot.Left;
         // The following relies on our being correct here - not writing a test for the test expected value
         static readonly DateOnly DateOfBirth = new DateOnly(1994, 01, 14);
-        const string ToStringValue = $"{FirstName} {LastName}";
+        //const string ToStringValue = $"{FirstName} {LastName}";
         readonly int Age = (DateOnly.FromDateTime(DateTime.Now).DayNumber - DateOfBirth.DayNumber) / 365;
+        string ToStringValue = $"{FirstName},{LastName},{JerseyNumber},{PlayerPosition},{PlayerShot},{HeightInInches},{WeightInPounds},Jan-14-1994,{BirthPlace.Replace(",", "-")}";
 
         //! [Fact]
         //public void Age_IsCorrect()
@@ -89,18 +90,86 @@ namespace Hockey.Test
             actual.Should().Be(Age);
         }
 
-        [Fact]
-
+        [Fact] // TODO: Fix this test
         public void HockeyPlayer_ToString_ReturnsCorrectValue()
         {
+            // Arrange 
             HockeyPlayer player = CreateTestHockeyPlayer();
-            string actual;
+            // Act
+            string actual = player.ToString();
 
-            actual = player.ToString();
-
-            actual.Should().Be(ToStringValue);
+            // Assert
+            actual.Should().Be(ToStringValue); //! This test fails
         }
 
+
+        [Fact]
+        public void HockeyPlayer_Parse_ParsesCorrectly()
+        {
+            HockeyPlayer actual;
+            string line = $"{FirstName},{LastName},{JerseyNumber},{PlayerPosition},{PlayerShot},{HeightInInches},{WeightInPounds},Jan-14-1994,{BirthPlace.Replace(",", "-")}";
+
+            actual = HockeyPlayer.Parse(line);
+
+            actual.Should().BeOfType<HockeyPlayer>();
+
+        }
+
+        [Theory]
+        [InlineData(null, "Line cannot be null or empty.")]
+        [InlineData("", "Line cannot be null or empty.")]
+        [InlineData(" ", "Line cannot be null or empty.")]
+
+        public void HockeyPlayer_Parse_ThrowsForNullEmptyOrWhiteSpaceLine(string line, string errMsg)
+        {
+            Action act = () => HockeyPlayer.Parse(line);
+
+            act.Should().Throw<ArgumentNullException>().WithMessage(errMsg);
+
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+
+        public void HockeyPlayer_Parse_ThrowsForNullEmptyOrWhiteSpace(string line)
+        {
+            Action act = () => HockeyPlayer.Parse(line);
+
+            act.Should().Throw<ArgumentNullException>().WithMessage("Line cannot be null or empty.");
+        }
+
+        [Theory]
+        [InlineData("one", "Incorrect number of fields.")]
+        public void HockeyPlayer_Parse_ThrowsForInvalidNumberOfFields(string line, string errMsg)
+        {
+            Action act = () => HockeyPlayer.Parse(line);
+
+            act.Should().Throw<InvalidDataException>().WithMessage(errMsg);
+        }
+
+        [Theory]
+        [InlineData("one,two,three,four,five,six,seven,eight,nine", "Error parsing line")]
+        public void HockeyPlayer_Parse_ThrowsForFormatError(string line, string errMsg)
+        {
+            Action act = () => HockeyPlayer.Parse(line);
+
+            act.Should().Throw<FormatException>().WithMessage($"*{errMsg}*");
+
+        }
+
+        [Fact]
+        public void HockeyPlayer_TryParse_ParsesCorrectly()
+        {
+            HockeyPlayer? actual = null;
+            bool result;
+
+            result = HockeyPlayer.TryParse(ToStringValue, out actual);
+
+            result.Should().BeTrue();
+            actual.Should().NotBeNull();
+        }
     } // end of Test1
 } // end of class
 

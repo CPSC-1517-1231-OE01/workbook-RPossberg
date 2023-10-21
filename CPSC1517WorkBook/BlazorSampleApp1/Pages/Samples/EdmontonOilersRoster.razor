@@ -1,0 +1,92 @@
+﻿@page "/edmonton-oilers"
+@using Hockey.Data
+@using Microsoft.AspNetCore
+@using System.IO.Pipelines
+
+<h3>Edmonton Oilers Roster</h3>
+
+@if (FeedbackMessage != null)
+{
+    <div class="alert alert-danger">
+        <p>@FeedbackMessage</p>
+    </div>
+}
+
+@if (Players.Count > 0)
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Jersey</th>
+                <th>Position</th>
+                <th>Shot</th>
+                <th>Height</th>
+                <th>Weight</th>
+                <th>Hometown</th>
+                <th>DOB</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var player in Players)
+            {
+                <tr>
+                    <td>@player.FirstName @player.LastName</td>
+                    <td>@player.JerseyNumber</td>
+                    <td>@player.Position</td>
+                    <td>@player.Shot</td>
+                    <td>@player.HeightInInches</td>
+                    <td>@player.BirthPlace</td>
+                    <td>@player.DateOfBirth</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private string? FeedbackMessage { get; set; }
+    private List<HockeyPlayer> Players { get; set; } = new List<HockeyPlayer>();
+
+    [Inject]
+    public IWebHostEnvironment WebHostEnvironment { get; set; } = default!;
+
+    protected override void OnInitialized()
+    {
+        string csvFilePath = $@"{WebHostEnvironment.ContentRootPath}\Data\players.csv";
+
+        FeedbackMessage = csvFilePath;
+
+        using (StreamReader reader = new StreamReader(csvFilePath))
+        {
+            // Skip the header
+            reader.ReadLine();
+
+            // Read in one line at a time until we reach the end of the file
+            string? currentLine;
+
+            while ((currentLine = reader.ReadLine()) != null)
+            {
+                try
+                {
+                    HockeyPlayer currentPlayer = null;
+                    if ((currentPlayer = HockeyPlayer.Parse(currentLine)) != null)
+                    {
+                        Players.Add(currentPlayer);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    FeedbackMessage = ex.Message;
+                }
+            }
+
+            // Not necessary in a using block, but I like to be explicit
+            reader.Close();
+        }
+
+        base.OnInitialized();
+    }
+}
+
+
