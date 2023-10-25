@@ -15,6 +15,11 @@
 
 
 @code {
-    private string? ReceivedData;
+    private string? ReceivedData { get; set; }
+
+    private void HandleDataReceived(string data)
+    {
+        ReceivedData = data;
+    }
 
 }

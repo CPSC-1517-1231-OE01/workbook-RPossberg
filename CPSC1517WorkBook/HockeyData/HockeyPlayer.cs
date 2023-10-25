@@ -7,21 +7,20 @@ namespace Hockey.Data
     /// An instance of this class will hold data about a hockey player
     /// The code for this class is the definition of that data
     /// The characteristics (data) of the class are:
-    ///     first name, last name, birth place, date of birth, height, weight, position, shot
+    ///     first name, last name, weight, height, date of birth, position, shot, birthplace
     /// </summary>
     public class HockeyPlayer
     {
-        // There are four components to a class:
-        // 1. Data (fields)
-        // 2. Properties
-        // 3. Constructors
-        // 4. Methods (functions)
+        // There are four components of a class definition
+        // - data fields (data members)
+        // - property
+        // - constructor
+        // - behaviour (methods)
 
-        // Data fields
-        // are storage areas in the class for data
+        // Data Fields
+        // are storage areas in the class
         // these are treated as variables
-        // they may be public, private, or public readonly
-
+        // these may be public, private, public readonly
         private string _firstName;
         private string _lastName;
         private DateOnly _dateOfBirth;
@@ -38,9 +37,9 @@ namespace Hockey.Data
         // The result purpose for implementing a constructor is to ensure that the data
         // fields are in a known and valid state.
         //
-        // If your class definition has NO explicit constructor included, the data fields
+        // If your class definition has NO explicit construtor included, the data fields
         //   and/or auto-implemented properties are set to the default C# data type value
-        // You can code one or more constructors (overloading) in the class definition
+        // You can code one or more constructos (overloading) in the class definition
         // If you code a constructor for the class, you are responsible for all constructors
         //   used by the class (i.e. only the ones you create are valid)
         // If you are going to code your own constructor(s) you will likely code the following
@@ -49,14 +48,13 @@ namespace Hockey.Data
         //   2) Greedy: this constructor defines a list of parameters, one for each 
         //      property
         //
-        // Syntax: access class name([list of parameters]) { code block }
+        // Syntax: access classname([list of parameters]) { code block }
         //
         // IMPORTANT: Constructors do not have a return type
         //            You do not call a constructor directly, must be preceded by the 
         //            "new" operator
         //            E.g. HockeyPlayer player = new HockeyPlayer(...)
 
-        // Constructors:
         // Default constructor
         // ===================================================================
         // =               LEFT HERE FOR POSTERITY, NOT IN USE               =
@@ -87,10 +85,10 @@ namespace Hockey.Data
         //    Position = Position.Center;
         //}
 
-        // Parameterized constructor (greedy constructor)
+        // Greedy Constructor
         /// <summary>
-        /// Creates a new instance of a HockeyPlayer with the specified values (params).
-        /// Will throw an exception if any of the params are invalid for the associated property.
+        /// Creates an instance of HockeyPlayer with the supplied params. Will throw an exception
+        /// if any of the params are invalid for the associated property.
         /// </summary>
         /// <param name="firstName"></param>
         /// <param name="lastName"></param>
@@ -106,7 +104,7 @@ namespace Hockey.Data
         {
             // Constructor body:
             // a) A parameter for every property
-            // b) You COULD perform validation here, but the properties already do it, so just use them
+            // b) You COULD perform validation here, but he properties already do it, so just use them
             // c) Validation for public readonly data members MUST be done here
             // d) validation for properties with a private set MUST be done here
             //    if not done in the property
@@ -133,12 +131,12 @@ namespace Hockey.Data
         // - if no 'set' is present, the property cannot be modified;
         //   it is effectively readonly, which is commonly used for derived data of
         //   the class
-        // - the set can be either public or privte
+        // - the set can be either public or private
         //     public: user can alter contents
         //     private: only code within the class can alter contents
         // A property MAY use init in place of set. The init keyword will ensure
         //   that the property can only be set during object construction (i.e. in the 
-        //   constructor). The property can never again be updated, enforcing immuatibility.
+        //   constructor). The property can never again be updated, enforcing immutability.
 
         // Fully-implemented property
         // a) a declared storage area (data field)
@@ -265,7 +263,7 @@ namespace Hockey.Data
         }
 
         /// <summary>
-        /// Represents the player's weight in pounds
+        /// Represents a hockey player's weight in pounds
         /// </summary>
         public int WeightInPounds
         {
@@ -279,55 +277,31 @@ namespace Hockey.Data
                 {
                     throw new ArgumentException($"Weight must be positive.");
                 }
+
                 _weightInPounds = value;
             }
         }
 
-
-        // Auto-implemented properties - using an enum so no validation is necessary
-        // These properties differ only in syntax from the fully-implemented properties above
+        // Auto-implemented property - using an enum so no validation necessary
+        // These properties differ only in syntax
         // Each property is responsible for a single piece of data
         // These properties do NOT reference a declared data field
         // The system generates an internal storage area of the return type
-        // The compiler will create a data field for the property and manage it for you
         // The system manages the internal storage for the accessor and mutator
-        // NOTE: there is NO additional logic applied to the data values
+        // NOTE: there is NO additional logic applied to the data value
 
         /// <summary>
-        /// Represents player's position (left wing, center, right wing, defense, goalie)
+        /// Represents the player's position
         /// </summary>
         public Position Position { get; set; }
 
         /// <summary>
-        /// Represents the player's shot (left or right)
+        /// Represents the player's shot hand
         /// </summary>
         public Shot Shot { get; set; }
 
-        // Derived property using expression-bodied property
-        // https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/expression-bodied-members
-
         /// <summary>
-        /// Represents the player's current age 
-        /// </summary>
-        public int Age => (DateOnly.FromDateTime(DateTime.Now).DayNumber - DateOfBirth.DayNumber) / 365;
-
-        // Behaviours (aka methods)
-        // A behaviour is any method in your class
-        // Behaviours can be private (for use by the class only) or public (for use by the class and other classes)
-        // All rules about methods are in effect for behaviours
-
-        // Behaviours are used to:
-        // 1. Perform some action
-        // 2. Return a value
-        // 3. A combination of 1 and 2
-
-        // A special method may be placed in the class to reflect the data stored by the 
-        // instance (object) of the class. This method is called ToString()
-        // This method is part of the system software and can be overridden by your own version of the method.
-
-
-        /// <summary>
-        /// Represents the player's last name
+        /// Represents the player's jersey number
         /// </summary>
         public int JerseyNumber
         {
@@ -340,16 +314,23 @@ namespace Hockey.Data
             {
                 if (value < 1 || value > 98)
                 {
-                    throw new ArgumentException("Jersey number must be between 1 and 98.");
+                    throw new ArgumentOutOfRangeException("Jersey number must be between 1 and 98.");
                 }
 
                 _jerseyNumber = value;
             }
         }
 
+        // Derived property using expression-bodied property
+        // https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/expression-bodied-members
+        /// <summary>
+        /// Represents the player's current age
+        /// </summary>
+        public int Age => (DateOnly.FromDateTime(DateTime.Now).DayNumber - DateOfBirth.DayNumber) / 365;
+
         // Behaviours (aka methods)
         // A behaviour is any method in your class
-        // Behaviours can be private (for use by the classonly); publoic (for use by the outside user)
+        // Behaviours can be private (for use by the class only); public (for use by the outside user)
         // All rules about methods are in effect
 
         // A special method may be placed in the class to reflect the data stored by the 
@@ -388,19 +369,20 @@ namespace Hockey.Data
 
             if (fields.Length != 9)
             {
-                throw new InvalidDataException("Incorrect number of fieds.");
+                throw new InvalidDataException("Incorrect number of fields.");
             }
 
             try
             {
                 player = new HockeyPlayer(fields[0], fields[1], fields[8], DateOnly.ParseExact(fields[7], "MMM-dd-yyyy", CultureInfo.InvariantCulture),
-                    int.Parse(fields[6]), int.Parse(fields[5]), int.Parse(fields[2]),
-                    Enum.Parse<Position>(fields[3]), Enum.Parse<Shot>(fields[4]));
+                int.Parse(fields[6]), int.Parse(fields[5]), int.Parse(fields[2]),
+                Enum.Parse<Position>(fields[3]), Enum.Parse<Shot>(fields[4]));
             }
             catch
             {
                 throw new FormatException($"Error parsing line {line}.");
             }
+
 
             return player;
         }
@@ -409,7 +391,7 @@ namespace Hockey.Data
         /// Parses a CSV line into a new Hockey player (out param)
         /// </summary>
         /// <param name="line">The CSV line to parse</param>
-        /// <param name="player">The new Hockey player</param>
+        /// <param name="player">The HockeyPlayer reference to assign</param>
         /// <returns>True if the parse was successful, false otherwise</returns>
         public static bool TryParse(string line, out HockeyPlayer? player)
         {
@@ -426,6 +408,5 @@ namespace Hockey.Data
 
             return isParsed;
         }
-
     }
 }

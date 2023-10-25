@@ -66,17 +66,18 @@ namespace Hockey.Test
             actual.Should().Be(value);
         }
 
-        // invalid jersey number < 1 || > 98
+        //? invalid jersey number < 1 || > 98  Test fails
         [Theory]
         [InlineData(0)]
         [InlineData(99)]
-        public void HockeyPlayer_JerseyNumber_BadSet(int value)
+        public void HockeyPlayer_JerseyNumber_BadSetThrows(int value)
         {
+            // Arrange 
             HockeyPlayer player = CreateTestHockeyPlayer();
-
             Action act = () => player.JerseyNumber = value;
 
-            act.Should().Throw<ArgumentOutOfRangeException>().WithMessage("Jersey Number must be between 1 and 98");
+            // Act/Assert
+            act.Should().Throw<ArgumentException>().WithMessage("Jersey number must be between 1 and 98.");
         }
 
         [Fact]
@@ -99,7 +100,7 @@ namespace Hockey.Test
             string actual = player.ToString();
 
             // Assert
-            actual.Should().Be(ToStringValue); //! This test fails
+            actual.Should().Be(ToStringValue); //? This test fails
         }
 
 
