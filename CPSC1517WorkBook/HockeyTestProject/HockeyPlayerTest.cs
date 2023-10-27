@@ -1,49 +1,72 @@
 using FluentAssertions;
 using Hockey.Data;
 using System.Collections;
+using System.Globalization;
+using System.Runtime.CompilerServices;
 
 namespace Hockey.Test
 {
     public class HockeyPlayerTest
     {
-        // Constants for a test player
-        const string FirstName = "Conner";
+        // Constants for test HockeyPlayer
+        const string FirstName = "Connor";
         const string LastName = "Brown";
         const string BirthPlace = "Toronto, ON, CAN";
+        static readonly DateOnly DateOfBirth = new DateOnly(1994, 01, 14);
         const int HeightInInches = 72;
         const int WeightInPounds = 188;
         const int JerseyNumber = 28;
         const Position PlayerPosition = Position.Center;
         const Shot PlayerShot = Shot.Left;
         // The following relies on our being correct here - not writing a test for the test expected value
-        static readonly DateOnly DateOfBirth = new DateOnly(1994, 01, 14);
-        //const string ToStringValue = $"{FirstName} {LastName}";
         readonly int Age = (DateOnly.FromDateTime(DateTime.Now).DayNumber - DateOfBirth.DayNumber) / 365;
-        string ToStringValue = $"{FirstName},{LastName},{JerseyNumber},{PlayerPosition},{PlayerShot},{HeightInInches},{WeightInPounds},Jan-14-1994,{BirthPlace.Replace(",", "-")}";
+        string ToStringValue = $"{FirstName},{LastName},{JerseyNumber},{PlayerPosition},{PlayerShot},{HeightInInches},{WeightInPounds},Jan-14-1994,{BirthPlace.Replace(", ", "-")}";
 
-        //! [Fact]
-        //public void Age_IsCorrect()
+        // Can quickly run a test to check our method for AGE above
+        //[Fact]
+        //public void AGE_Is_Correct()
         //{
-        //    Age.Should().Be(29);
-        //TODO: Fix this test
+        //    AGE.Should().Be(29);
+        //}
 
         public HockeyPlayer CreateTestHockeyPlayer()
         {
-            return new HockeyPlayer(FirstName, LastName, BirthPlace, DateOfBirth, HeightInInches, WeightInPounds, JerseyNumber, PlayerPosition, PlayerShot);
+            return new HockeyPlayer(FirstName, LastName, BirthPlace, DateOfBirth, WeightInPounds, HeightInInches, JerseyNumber, PlayerPosition, PlayerShot);
         }
 
-
-        // Test data generator for class data
+        // Test data generateor for class data (see line 85 below)
         private class BadHockeyPlayerTestDataGenerator : IEnumerable<object[]>
         {
             private readonly List<object[]> _data = new List<object[]>
             {
                 // First Name tests
-                new object[]{"", LastName, BirthPlace, DateOfBirth, HeightInInches, WeightInPounds, JerseyNumber, PlayerPosition, PlayerShot, "First name cannot be null or empty." },
-                new object[]{" ", LastName, BirthPlace, DateOfBirth, HeightInInches, WeightInPounds, JerseyNumber, PlayerPosition, PlayerShot, "First name cannot be null or empty." },
-                new object[]{null, LastName, BirthPlace, DateOfBirth, HeightInInches, WeightInPounds, JerseyNumber, PlayerPosition, PlayerShot, "First name cannot be null or empty." },
+                new object[]{"", LastName, BirthPlace, DateOfBirth, WeightInPounds, HeightInInches,JerseyNumber, PlayerPosition, PlayerShot, "First name cannot be null or empty." },
+                new object[]{" ", LastName, BirthPlace, DateOfBirth, WeightInPounds, HeightInInches, JerseyNumber, PlayerPosition, PlayerShot, "First name cannot be null or empty." },
+                new object[]{null, LastName, BirthPlace, DateOfBirth, WeightInPounds, HeightInInches, JerseyNumber, PlayerPosition, PlayerShot, "First name cannot be null or empty." },
 
-                //x TODO: complete remaining private set tests
+                // Last Name tests
+                new object[]{FirstName, "", BirthPlace, DateOfBirth, WeightInPounds, HeightInInches, JerseyNumber, PlayerPosition, PlayerShot, "Last name cannot be null or empty." },
+                new object[]{FirstName, " ", BirthPlace, DateOfBirth, WeightInPounds, HeightInInches, JerseyNumber, PlayerPosition, PlayerShot, "Last name cannot be null or empty." },
+                new object[]{FirstName, null, BirthPlace, DateOfBirth, WeightInPounds, HeightInInches, JerseyNumber, PlayerPosition, PlayerShot, "Last name cannot be null or empty." },
+
+                // Birth Place tests
+                new object[]{FirstName, LastName, "", DateOfBirth, WeightInPounds, HeightInInches, JerseyNumber, PlayerPosition, PlayerShot, "Birth place cannot be null or empty." },
+                new object[]{FirstName, LastName, " ", DateOfBirth, WeightInPounds, HeightInInches, JerseyNumber, PlayerPosition, PlayerShot, "Birth place cannot be null or empty." },
+                new object[]{FirstName, LastName, null, DateOfBirth, WeightInPounds, HeightInInches, JerseyNumber, PlayerPosition, PlayerShot, "Birth place cannot be null or empty." },
+
+                // Date of Birth test
+                new object[]{FirstName, LastName, BirthPlace, DateOnly.FromDateTime(DateTime.Now.AddDays(1)), WeightInPounds, HeightInInches, JerseyNumber, PlayerPosition, PlayerShot, "Date of birth cannot be in the future." },
+
+                // Height test
+                new object[]{FirstName, LastName, BirthPlace, DateOfBirth, WeightInPounds , - 1, JerseyNumber, PlayerPosition, PlayerShot, "Height must be positive." },
+
+                // Weight test
+                new object[]{FirstName, LastName, BirthPlace, DateOfBirth, -1, HeightInInches, JerseyNumber, PlayerPosition, PlayerShot, "Weight must be positive." },
+
+                // Jersey number tests
+                new object[]{FirstName, LastName, BirthPlace, DateOfBirth, HeightInInches, WeightInPounds, 0, PlayerPosition, PlayerShot, "Jersey number must be between 1 and 98." },
+                new object[]{FirstName, LastName, BirthPlace, DateOfBirth, HeightInInches, WeightInPounds, 99, PlayerPosition, PlayerShot, "Jersey number must be between 1 and 98." },
+
             };
 
             public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
@@ -51,22 +74,77 @@ namespace Hockey.Test
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
-        // valid jersey number 1 - 98
+        // Alternative test data generator for member data (see line 97 below)
+        public static IEnumerable<object[]> GoodHockeyPlayerTestDataGenerator()
+        {
+            // Yield as many test objects as desired/required
+            yield return new object[]
+            {
+               FirstName, LastName, BirthPlace, DateOfBirth, HeightInInches, WeightInPounds, JerseyNumber, PlayerPosition, PlayerShot,
+            };
+        }
+
+        // ===================================================================
+        // =               LEFT HERE FOR POSTERITY, NOT IN USE               =
+        // ===================================================================
+        //[Fact]
+        //public void HockeyPlayer_DefaultConstructor_ReturnsHockeyPlayer()
+        //{
+        //    HockeyPlayer sut = new HockeyPlayer();
+
+        //    // We're not testing the properties ... need to test the data fields, but they're private! So, what to do? Simply test that this
+        //    // constructor returns a HockeyPlayer instance.
+
+        //    sut.Should().NotBeNull();
+        //}
+
+        // Switched the following from an original Fact test (relying on line 58 below) to a Theory test 
+        // with two options: ClassData and MemberData
+        //[Fact]
+        [Theory]
+        //[ClassData(typeof(TestHockeyPlayerGenerator))]
+        [MemberData(nameof(GoodHockeyPlayerTestDataGenerator))]
+        public void HockeyPlayer_GreedyConstructor_ReturnsHockeyPlayer(string firstName, string lastName, string birthPlace,
+            DateOnly dateOfBirth, int weightInPounds, int heightInInches, int jerseyNumber, Position position, Shot shot)
+        {
+            // TODO: describe and explain the issue(s) with performing the test in this way - use a ClassData or MemberData option
+            //HockeyPlayer sut = new HockeyPlayer("Connor", "Brown", "Toronto, ON, CAN", new DateOnly(1994, 01, 14), 82, 183, Position.Center, Shot.Right);
+
+            HockeyPlayer actual;
+
+            actual = new HockeyPlayer(firstName, lastName, birthPlace, dateOfBirth, weightInPounds, heightInInches, jerseyNumber, position, shot);
+
+            actual.Should().NotBeNull();
+        }
+
+        [Theory]
+        [ClassData(typeof(BadHockeyPlayerTestDataGenerator))]
+        public void HockeyPlayer_GreedyConstructor_ThrowsException(string firstName, string lastName, string birthPlace,
+            DateOnly dateOfBirth, int weightInPounds, int heightInInches, int jerseyNumber, Position position, Shot shot, string errMsg)
+        {
+            // Arrange
+            Action act = () => new HockeyPlayer(firstName, lastName, birthPlace, dateOfBirth, weightInPounds, heightInInches, jerseyNumber, position, shot);
+
+            // Act/Assert
+            act.Should().Throw<ArgumentException>().WithMessage(errMsg);
+        }
+
         [Theory]
         [InlineData(1)]
         [InlineData(98)]
         public void HockeyPlayer_JerseyNumber_GoodSetAndGet(int value)
         {
+            // Arrange 
             HockeyPlayer player = CreateTestHockeyPlayer();
-            int actual;
 
+            // Act
             player.JerseyNumber = value;
-            actual = player.JerseyNumber;
+            int actual = player.JerseyNumber;
 
+            // Assert
             actual.Should().Be(value);
         }
 
-        //? invalid jersey number < 1 || > 98  Test fails
         [Theory]
         [InlineData(0)]
         [InlineData(99)]
@@ -81,17 +159,19 @@ namespace Hockey.Test
         }
 
         [Fact]
-        public void HockeyPlayer_Age_ReturnsCorrectValue()
+        public void HockeyPlayer_Age_ReturnsCorrectAge()
         {
+            // Arrange 
             HockeyPlayer player = CreateTestHockeyPlayer();
-            int actual;
 
-            actual = player.Age;
+            // Act
+            int actual = player.Age;
 
+            // Assert
             actual.Should().Be(Age);
         }
 
-        [Fact] // TODO: Fix this test
+        [Fact]
         public void HockeyPlayer_ToString_ReturnsCorrectValue()
         {
             // Arrange 
@@ -100,15 +180,14 @@ namespace Hockey.Test
             string actual = player.ToString();
 
             // Assert
-            actual.Should().Be(ToStringValue); //? This test fails
+            actual.Should().Be(ToStringValue);
         }
-
 
         [Fact]
         public void HockeyPlayer_Parse_ParsesCorrectly()
         {
             HockeyPlayer actual;
-            string line = $"{FirstName},{LastName},{JerseyNumber},{PlayerPosition},{PlayerShot},{HeightInInches},{WeightInPounds},Jan-14-1994,{BirthPlace.Replace(",", "-")}";
+            string line = $"{FirstName},{LastName},{JerseyNumber},{PlayerPosition},{PlayerShot},{HeightInInches},{WeightInPounds},Jan-14-1994,{BirthPlace.Replace(", ", "-")}";
 
             actual = HockeyPlayer.Parse(line);
 
@@ -121,7 +200,7 @@ namespace Hockey.Test
         [InlineData("", "Line cannot be null or empty.")]
         [InlineData(" ", "Line cannot be null or empty.")]
 
-        public void HockeyPlayer_Parse_ThrowsForNullEmptyOrWhiteSpaceLine(string line, string errMsg)
+		public void HockeyPlayer_Parse_ThrowsForNullEmptyOrWhiteSpaceLine(string line, string errMsg)
         {
             Action act = () => HockeyPlayer.Parse(line);
 
@@ -130,35 +209,24 @@ namespace Hockey.Test
         }
 
         [Theory]
-        [InlineData(null)]
-        [InlineData("")]
-        [InlineData(" ")]
+		[InlineData("one", "Incorrect number of fieds.")]
+		public void HockeyPlayer_Parse_ThrowsForInvalidNumberOfFields(string line, string errMsg)
+		{
+			Action act = () => HockeyPlayer.Parse(line);
 
-        public void HockeyPlayer_Parse_ThrowsForNullEmptyOrWhiteSpace(string line)
-        {
-            Action act = () => HockeyPlayer.Parse(line);
+			act.Should().Throw<InvalidDataException>().WithMessage(errMsg);
 
-            act.Should().Throw<ArgumentNullException>().WithMessage("Line cannot be null or empty.");
-        }
+		}
 
         [Theory]
-        [InlineData("one", "Incorrect number of fields.")]
-        public void HockeyPlayer_Parse_ThrowsForInvalidNumberOfFields(string line, string errMsg)
-        {
-            Action act = () => HockeyPlayer.Parse(line);
+		[InlineData("one,two,three,four,five,six,seven,eight,nine", "Error parsing line")]
+		public void HockeyPlayer_Parse_ThrowsForFormatError(string line, string errMsg)
+		{
+			Action act = () => HockeyPlayer.Parse(line);
 
-            act.Should().Throw<InvalidDataException>().WithMessage(errMsg);
-        }
+			act.Should().Throw<FormatException>().WithMessage($"*{errMsg}*");
 
-        [Theory]
-        [InlineData("one,two,three,four,five,six,seven,eight,nine", "Error parsing line")]
-        public void HockeyPlayer_Parse_ThrowsForFormatError(string line, string errMsg)
-        {
-            Action act = () => HockeyPlayer.Parse(line);
-
-            act.Should().Throw<FormatException>().WithMessage($"*{errMsg}*");
-
-        }
+		}
 
         [Fact]
         public void HockeyPlayer_TryParse_ParsesCorrectly()
@@ -171,6 +239,5 @@ namespace Hockey.Test
             result.Should().BeTrue();
             actual.Should().NotBeNull();
         }
-    } // end of Test1
-} // end of class
-
+	}
+}
