@@ -1,6 +1,5 @@
-﻿﻿@page "/random-number"
-
-<h3>Max Random Number</h3>
+﻿@page "/samples/maxrandomnumber"
+<h3>MaxRandomNumber</h3>
 
 <p>This page will render a random number between 1 and a max value.</p>
 
@@ -44,7 +43,7 @@
 		The btn and btn-outline-* classes are for formatting buttons
 		See: https://getbootstrap.com/docs/5.3/components/buttons/
 		*@
-		<button class="btn btn-outline-primary" @onclick="@GenerateRandomNumber">Generate Number</button>
+		<button class="btn btn-outline-primary" @onclick="@GenerateRandomNumber">Geneate Number</button>
 	</div>
 	<div class="mb-3">
 		<button class="btn btn-outline-secondary" @onclick="@ClearMessage">Clear Output</button>
@@ -59,7 +58,7 @@
 	private string? FeedbackMessage { get; set; }
 
 	/// <summary>
-	/// Generates a random number between 1 and the MaxNumber value
+	/// Generates a randome number between 1 and the MaxNumber value
 	/// </summary>
 	private void GenerateRandomNumber()
 	{
