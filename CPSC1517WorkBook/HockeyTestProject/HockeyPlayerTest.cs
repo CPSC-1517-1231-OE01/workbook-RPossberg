@@ -1,8 +1,6 @@
 using FluentAssertions;
 using Hockey.Data;
 using System.Collections;
-using System.Globalization;
-using System.Runtime.CompilerServices;
 
 namespace Hockey.Test
 {
@@ -11,7 +9,7 @@ namespace Hockey.Test
         // Constants for test HockeyPlayer
         const string FirstName = "Connor";
         const string LastName = "Brown";
-        const string BirthPlace = "Toronto, ON, CAN";
+        const string BirthPlace = "Toronto-ON-CAN";
         static readonly DateOnly DateOfBirth = new DateOnly(1994, 01, 14);
         const int HeightInInches = 72;
         const int WeightInPounds = 188;
@@ -200,7 +198,7 @@ namespace Hockey.Test
         [InlineData("", "Line cannot be null or empty.")]
         [InlineData(" ", "Line cannot be null or empty.")]
 
-		public void HockeyPlayer_Parse_ThrowsForNullEmptyOrWhiteSpaceLine(string line, string errMsg)
+        public void HockeyPlayer_Parse_ThrowsForNullEmptyOrWhiteSpaceLine(string line, string errMsg)
         {
             Action act = () => HockeyPlayer.Parse(line);
 
@@ -209,24 +207,24 @@ namespace Hockey.Test
         }
 
         [Theory]
-		[InlineData("one", "Incorrect number of fieds.")]
-		public void HockeyPlayer_Parse_ThrowsForInvalidNumberOfFields(string line, string errMsg)
-		{
-			Action act = () => HockeyPlayer.Parse(line);
+        [InlineData("one", "Incorrect number of fields.")]
+        public void HockeyPlayer_Parse_ThrowsForInvalidNumberOfFields(string line, string errMsg)
+        {
+            Action act = () => HockeyPlayer.Parse(line);
 
-			act.Should().Throw<InvalidDataException>().WithMessage(errMsg);
+            act.Should().Throw<InvalidDataException>().WithMessage(errMsg);
 
-		}
+        }
 
         [Theory]
-		[InlineData("one,two,three,four,five,six,seven,eight,nine", "Error parsing line")]
-		public void HockeyPlayer_Parse_ThrowsForFormatError(string line, string errMsg)
-		{
-			Action act = () => HockeyPlayer.Parse(line);
+        [InlineData("one,two,three,four,five,six,seven,eight,nine", "Error parsing line")]
+        public void HockeyPlayer_Parse_ThrowsForFormatError(string line, string errMsg)
+        {
+            Action act = () => HockeyPlayer.Parse(line);
 
-			act.Should().Throw<FormatException>().WithMessage($"*{errMsg}*");
+            act.Should().Throw<FormatException>().WithMessage($"*{errMsg}*");
 
-		}
+        }
 
         [Fact]
         public void HockeyPlayer_TryParse_ParsesCorrectly()
@@ -239,5 +237,5 @@ namespace Hockey.Test
             result.Should().BeTrue();
             actual.Should().NotBeNull();
         }
-	}
+    }
 }
