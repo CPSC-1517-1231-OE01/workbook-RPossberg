@@ -1,14 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+//var db = new WestWindContext();
+//var countOfCustomers = db.Customers.Count();
 
-using WestWindSystem.DAL;
+//Console.WriteLine($"There are {countOfCustomers} customers in the database.");
 
-var db = new WestWindContext();
-var countOfCustomers = db.Customers.Count();
-
-Console.WriteLine($"There are {countOfCustomers} customers in the database.");
-
-var customer = db.Customers.FirstOrDefault();
+//var customer = db.Customers.FirstOrDefault();
 
 
-Console.WriteLine($"The first customer is {customer.ContactName}");
+//Console.WriteLine($"The first customer is {customer.ContactName}");

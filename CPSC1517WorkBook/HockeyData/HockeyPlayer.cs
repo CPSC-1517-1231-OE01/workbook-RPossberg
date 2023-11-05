@@ -37,9 +37,9 @@ namespace Hockey.Data
         // The result purpose for implementing a constructor is to ensure that the data
         // fields are in a known and valid state.
         //
-        // If your class definition has NO explicit construtor included, the data fields
+        // If your class definition has NO explicit constructor included, the data fields
         //   and/or auto-implemented properties are set to the default C# data type value
-        // You can code one or more constructos (overloading) in the class definition
+        // You can code one or more constructor (overloading) in the class definition
         // If you code a constructor for the class, you are responsible for all constructors
         //   used by the class (i.e. only the ones you create are valid)
         // If you are going to code your own constructor(s) you will likely code the following
@@ -59,9 +59,9 @@ namespace Hockey.Data
         // ===================================================================
         // =               LEFT HERE FOR POSTERITY, NOT IN USE               =
         // ===================================================================
-        ///// <summary>
-        ///// Creates a default instance of a HockeyPlayer
-        ///// </summary>
+        /// <summary>
+        /// Creates a default instance of a HockeyPlayer
+        /// </summary>
         //public HockeyPlayer()
         //{
         //    // Constructor body: 
@@ -314,7 +314,7 @@ namespace Hockey.Data
             {
                 if (value < 1 || value > 98)
                 {
-                    throw new ArgumentOutOfRangeException("Jersey number must be between 1 and 98.");
+                    throw new ArgumentException("Jersey number must be between 1 and 98.");
                 }
 
                 _jerseyNumber = value;

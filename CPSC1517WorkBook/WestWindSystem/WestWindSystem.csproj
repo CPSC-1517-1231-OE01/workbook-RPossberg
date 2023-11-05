@@ -24,7 +24,6 @@
     <ProjectReference Include="..\ObjectClassLibraryTest\ObjectClassLibraryTest.csproj" />
     <ProjectReference Include="..\ObjectClassLibrary\ObjectClassLibrary.csproj" />
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
-    <ProjectReference Include="..\WestWindWebApp\WestWindWebApp.csproj" />
   </ItemGroup>
 
 </Project>
