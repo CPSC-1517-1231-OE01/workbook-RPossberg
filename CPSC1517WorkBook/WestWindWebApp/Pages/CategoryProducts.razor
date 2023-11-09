@@ -1,0 +1,21 @@
+﻿@page "/category-products"
+@using WestWindSystem.BLL
+@using WestWindSystem.ENTITIES
+
+using WestWindSystem.BLL;
+using WestWindSystem.Entities;
+
+<h3>CategoryProductsPage</h3>
+
+@code {
+    [Inject]
+    CategoryServices CategoryServices { get; set; }
+
+    public List<Category>? Categories { get; set; }
+
+protected override void OnInitialized()
+    {
+        Categories = CategoryServices.GetCategories();
+        base.OnInitialized();
+    }
+}
