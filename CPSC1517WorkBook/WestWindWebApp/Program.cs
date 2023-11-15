@@ -7,6 +7,9 @@ using WestWindWebApp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.WWBackEndDependencies(options =>
+    options.UseSqlServer());
+
 //***************************************************************
 // Add our services to the web application container
 // NOTE: the method calls in the BackEndExtensions class could be
@@ -25,7 +28,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Having the connection string in here is difficult to manage,
 // move to the appsettings.json file
 var connectionString = builder.Configuration.GetConnectionString("WWDB");
-builder.Services.WwBackEndDependencies(options =>
+builder.Services.WWBackEndDependencies(options =>
     options.UseSqlServer(connectionString));
 //***************************************************************
 
