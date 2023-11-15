@@ -16,7 +16,8 @@ else
         <p>No customer found @(string.IsNullOrWhiteSpace(CustomerId) ? "" : $"with id = {CustomerId}")</p>
     </div>
 }
-    // The @code block is used to define the code for the component.
+@* The @code block is used to define the code for the component. *@
+
 @code {
     [Parameter]
     public string? CustomerId { get; set; }

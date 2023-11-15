@@ -466,5 +466,11 @@ public partial class WestWindContext : DbContext
         OnModelCreatingPartial(modelBuilder);
     }
 
+    /// <summary>
+    /// This method can be used to define any custom model updating that is required,
+    /// but not implemented by the dbcontext-scaffold command (so, any additional work
+    /// that would be overridden by the command should it be run again in the future).
+    /// </summary>
+    /// <param name="modelBuilder"></param>
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
