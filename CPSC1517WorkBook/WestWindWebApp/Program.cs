@@ -7,7 +7,7 @@ using WestWindWebApp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.WWBackEndDependencies(options =>
+builder.Services.WwBackEndDependencies(options =>
     options.UseSqlServer());
 
 //***************************************************************
@@ -22,14 +22,14 @@ builder.Services.WWBackEndDependencies(options =>
 // system.
 
 // Register a factory and configure the options
-//builder.Services.WWBackEndDependencies(options =>
+//builder.Services.WwBackEndDependencies(options =>
 //	options.UseSqlServer("Server=.;Database=WestWind;TrustServerCertificate=True;Trusted_Connection=true;MultipleActiveResultSets=true"));
 
 // Having the connection string in here is difficult to manage,
 // move to the appsettings.json file
 var connectionString = builder.Configuration.GetConnectionString("WWDB");
-builder.Services.WWBackEndDependencies(options =>
-    options.UseSqlServer(connectionString));
+builder.Services.WwBackEndDependencies(
+    options => options.UseSqlServer(connectionString));
 //***************************************************************
 
 // Add services to the container.

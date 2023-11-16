@@ -20,7 +20,8 @@ namespace WestWindSystem.BLL
         /// <returns>A list of products, if any were found</returns>
         public List<Product>? GetProductsByCategoryId(int id)
         {
-            return _context.Products.Where(p => p.CategoryId == id)
+            return _context.Products
+                .Where(p => p.CategoryId == id)
                 .Include(p => p.Supplier)
                 .ToList<Product>();
         }
@@ -34,8 +35,8 @@ namespace WestWindSystem.BLL
         {
             partial = partial.ToLower();
             return _context.Products
-                .Include(p => p.Supplier)
                 .Where(p => p.ProductName.ToLower().Contains(partial) || p.Supplier.CompanyName.ToLower().Contains(partial))
+                .Include(p => p.Supplier)
                 .ToList<Product>();
         }
 

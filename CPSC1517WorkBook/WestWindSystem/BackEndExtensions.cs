@@ -12,7 +12,7 @@ namespace WestWindSystem
 {
     public static class BackEndExtensions
     {
-        public static void WWBackEndDependencies(this IServiceCollection services,
+        public static void WwBackEndDependencies(this IServiceCollection services,
             Action<DbContextOptionsBuilder> options)
         {
             // Now, register all services that will be used by the system(context setup)
