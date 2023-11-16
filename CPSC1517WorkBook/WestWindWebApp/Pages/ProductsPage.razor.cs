@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using WestWindSystem.BLL;
-using WestWindSystem.ENTITIES;
+using WestWindSystem.Entities;
 
 namespace WestWindWebApp.Pages
 {

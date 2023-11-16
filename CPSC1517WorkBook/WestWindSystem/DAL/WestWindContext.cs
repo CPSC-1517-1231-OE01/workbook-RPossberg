@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WestWindSystem.ENTITIES;
+using WestWindSystem.Entities;
 
 namespace WestWindSystem.DAL;
 
@@ -58,6 +58,8 @@ public partial class WestWindContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.UseCollation("Latin1_General_CI_AS");
+
         modelBuilder.Entity<Address>(entity =>
         {
             entity.Property(e => e.AddressId).HasColumnName("AddressID");
@@ -72,7 +74,7 @@ public partial class WestWindContext : DbContext
 
         modelBuilder.Entity<BuildVersion>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__BuildVer__3214EC07F0F1CFE8");
+            entity.HasKey(e => e.Id).HasName("PK__BuildVer__3214EC0720BD5B2B");
 
             entity.ToTable("BuildVersion");
 
@@ -219,7 +221,7 @@ public partial class WestWindContext : DbContext
 
         modelBuilder.Entity<ManifestItem>(entity =>
         {
-            entity.HasKey(e => e.ManifestItemId).HasName("PK__Manifest__9000192CCAA7F8C8");
+            entity.HasKey(e => e.ManifestItemId).HasName("PK__Manifest__9000192C1C0F2E74");
 
             entity.Property(e => e.ManifestItemId).HasColumnName("ManifestItemID");
             entity.Property(e => e.ProductId).HasColumnName("ProductID");
@@ -396,7 +398,7 @@ public partial class WestWindContext : DbContext
 
         modelBuilder.Entity<Shipment>(entity =>
         {
-            entity.HasKey(e => e.ShipmentId).HasName("PK__Shipment__5CAD378DBA31FB61");
+            entity.HasKey(e => e.ShipmentId).HasName("PK__Shipment__5CAD378D6F045399");
 
             entity.Property(e => e.ShipmentId).HasColumnName("ShipmentID");
             entity.Property(e => e.FreightCharge).HasColumnType("money");
@@ -466,11 +468,5 @@ public partial class WestWindContext : DbContext
         OnModelCreatingPartial(modelBuilder);
     }
 
-    /// <summary>
-    /// This method can be used to define any custom model updating that is required,
-    /// but not implemented by the dbcontext-scaffold command (so, any additional work
-    /// that would be overridden by the command should it be run again in the future).
-    /// </summary>
-    /// <param name="modelBuilder"></param>
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

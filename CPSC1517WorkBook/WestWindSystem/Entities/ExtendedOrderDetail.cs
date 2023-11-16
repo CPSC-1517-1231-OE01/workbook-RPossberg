@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WestWindSystem.ENTITIES;
+namespace WestWindSystem.Entities;
 
 public partial class ExtendedOrderDetail
 {
