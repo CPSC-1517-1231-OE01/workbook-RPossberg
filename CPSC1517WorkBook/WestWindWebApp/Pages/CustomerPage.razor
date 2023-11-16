@@ -1,5 +1,5 @@
 ﻿@page "/customers/{CustomerId}"
-@using WestWindSystem.Entities
+@using WestWindSystem.ENTITIES
 @using WestWindSystem.BLL
 
 <h3>Customer Page</h3>
@@ -13,11 +13,7 @@
 else
 {
     <div class="alert alert-info">
-        <p>
-            No customer found @(string.IsNullOrWhiteSpace(CustomerId)
-        ? "" :
-        $"with id = {CustomerId}")
-        </p>
+        <p>No customer found @(string.IsNullOrWhiteSpace(CustomerId) ? "" : $"with id = {CustomerId}")</p>
     </div>
 }
 @* The @code block is used to define the code for the component. *@

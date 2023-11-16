@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WestWindSystem.Entities;
+namespace WestWindSystem.ENTITIES;
 
 public partial class PaymentType
 {

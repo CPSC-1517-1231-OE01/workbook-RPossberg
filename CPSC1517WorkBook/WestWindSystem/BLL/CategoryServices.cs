@@ -1,9 +1,6 @@
 ﻿
-
-// Ignore Spelling: BLL
-
 using WestWindSystem.DAL;
-using WestWindSystem.Entities;
+using WestWindSystem.ENTITIES;
 
 
 namespace WestWindSystem.BLL
