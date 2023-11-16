@@ -1,8 +1,8 @@
 using FluentAssertions;
-using Hockey.Data;
+using HockeyData;
 using System.Collections;
 
-namespace Hockey.Test
+namespace HockeyTestProject
 {
     public class HockeyPlayerTest
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WestWindSystem.DAL;
-using WestWindSystem.ENTITIES;
+using WestWindSystem.Entities;
 
 namespace WestWindSystem.BLL
 {

@@ -1,4 +1,4 @@
-﻿namespace Hockey.Data
+﻿namespace HockeyData
 {
     /// <summary>
     /// Represents a Hockey Team
@@ -52,7 +52,7 @@
 
                 // Using LINQ method foramt
                 int numOfGoalies = Players.Where(p => p.Position == Position.Goalie).Count();
-                
+
                 return TotalPlayers >= MinPlayers && TotalPlayers <= MaxPlayers && numOfGoalies >= MinGoalies && numOfGoalies <= MaxGoalies;
             }
         }
@@ -63,7 +63,8 @@
         /// <param name="city">Home city for the team</param>
         /// <param name="name">Team name</param>
         /// <exception cref="ArgumentException">Throws if eitehr the city or name are empty</exception>
-        public HockeyTeam(string city, string name) { 
+        public HockeyTeam(string city, string name)
+        {
             if (string.IsNullOrWhiteSpace(city))
             {
                 throw new ArgumentException("City cannot be empty.");

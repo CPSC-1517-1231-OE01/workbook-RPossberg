@@ -1,7 +1,7 @@
 ﻿//***************************************************************
 // Required namespaces
 using WestWindSystem.DAL;
-using WestWindSystem.ENTITIES;
+using WestWindSystem.Entities;
 //***************************************************************
 
 namespace WestWindSystem.BLL
@@ -34,7 +34,8 @@ namespace WestWindSystem.BLL
         /// <returns>A Customer if found, null otherwise</returns>
         public Customer? GetCustomerById(string id)
         {
-            Customer? customer = _context.Customers.Where(c => c.CustomerId == id).FirstOrDefault();
+            Customer? customer = _context.Customers.Where(c => c.CustomerId == id)
+                .FirstOrDefault();
             return customer;
         }
     }

@@ -1,5 +1,4 @@
-﻿using Hockey.Data;
-using Utils;
+﻿using HockeyData;
 
 Console.WriteLine("Welcome to the HockeyPlayer Test App");
 
