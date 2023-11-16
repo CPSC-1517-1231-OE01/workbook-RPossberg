@@ -1,5 +1,4 @@
 using FluentAssertions;
-using Utils;
 
 namespace MyUtilitiesTestProject
 {

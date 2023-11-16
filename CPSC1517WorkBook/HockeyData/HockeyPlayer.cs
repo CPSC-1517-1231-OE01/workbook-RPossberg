@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
-using Utils;
 
-namespace Hockey.Data
+namespace HockeyData
 {
     /// <summary>
     /// An instance of this class will hold data about a hockey player
@@ -398,7 +397,7 @@ namespace Hockey.Data
             bool isParsed = false;
             try
             {
-                player = HockeyPlayer.Parse(line);
+                player = Parse(line);
                 isParsed = true;
             }
             catch

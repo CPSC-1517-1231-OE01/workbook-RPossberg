@@ -1,9 +1,9 @@
 ﻿using FluentAssertions;
-using Hockey.Data;
+using HockeyData;
 using System.Collections;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace Hockey.Test
+namespace HockeyTestProject
 {
     public class HockeyTeamTest
     {
@@ -70,7 +70,7 @@ namespace Hockey.Test
                     position = Position.Defense;
                 }
 
-                team.AddPlayer(new HockeyPlayer($"{firstName}{number}", $"{lastName}{number}", $"{birthPlace}{number}", 
+                team.AddPlayer(new HockeyPlayer($"{firstName}{number}", $"{lastName}{number}", $"{birthPlace}{number}",
                     dateOfBirth.AddDays(1), weight + number, height + number, jerseyNumber + number, position, shot));
             }
 
@@ -129,7 +129,7 @@ namespace Hockey.Test
             HockeyTeam team = CreateTestHockeyTeam(0);
 
             Action act = () => team.AddPlayer(null);
-            
+
             act.Should().Throw<ArgumentNullException>();
         }
 
@@ -154,7 +154,7 @@ namespace Hockey.Test
             Action act;
 
             act = () => team.RemovePlayer(player);
-            
+
             act.Should().Throw<InvalidOperationException>();
         }
 
