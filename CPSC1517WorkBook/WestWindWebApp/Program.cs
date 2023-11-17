@@ -7,12 +7,9 @@ using WestWindWebApp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-<<<<<<< HEAD
 builder.Services.WwBackEndDependencies(options =>
     options.UseSqlServer());
 
-=======
->>>>>>> parent of d9c3778 (The most important changes include adding namespace references to BackEndExtensions.cs file, registering CategoryServices using AddTransient method in BackEndExtensions.cs file, and adding a new menu item to NavMenu.razor file.)
 //***************************************************************
 // Add our services to the web application container
 // NOTE: the method calls in the BackEndExtensions class could be
@@ -25,19 +22,14 @@ builder.Services.WwBackEndDependencies(options =>
 // system.
 
 // Register a factory and configure the options
-//builder.Services.WwBackEndDependencies(options =>
+//builder.Services.WWBackEndDependencies(options =>
 //	options.UseSqlServer("Server=.;Database=WestWind;TrustServerCertificate=True;Trusted_Connection=true;MultipleActiveResultSets=true"));
 
 // Having the connection string in here is difficult to manage,
 // move to the appsettings.json file
 var connectionString = builder.Configuration.GetConnectionString("WWDB");
-<<<<<<< HEAD
-builder.Services.WwBackEndDependencies(
-    options => options.UseSqlServer(connectionString));
-=======
 builder.Services.WwBackEndDependencies(options =>
     options.UseSqlServer(connectionString));
->>>>>>> parent of d9c3778 (The most important changes include adding namespace references to BackEndExtensions.cs file, registering CategoryServices using AddTransient method in BackEndExtensions.cs file, and adding a new menu item to NavMenu.razor file.)
 //***************************************************************
 
 // Add services to the container.

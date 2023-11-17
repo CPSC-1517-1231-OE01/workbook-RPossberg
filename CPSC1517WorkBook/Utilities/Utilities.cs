@@ -1,4 +1,4 @@
-﻿namespace Utilities
+﻿namespace Util
 {
     public static class Utilities
     {

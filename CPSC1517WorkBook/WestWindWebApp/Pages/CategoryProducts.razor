@@ -15,7 +15,7 @@ using WestWindSystem.Entities;
 
 protected override void OnInitialized()
     {
-        Categories = CategoryServices.GetCategories();
+        Categories = CategoryServices.GetAllCategories();
         base.OnInitialized();
     }
 }

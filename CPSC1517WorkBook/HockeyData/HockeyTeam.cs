@@ -1,4 +1,5 @@
-﻿namespace Hockey.Data
+﻿namespace HockeyData
+
 {
     /// <summary>
     /// Represents a Hockey Team

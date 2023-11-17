@@ -1,4 +1,4 @@
-﻿namespace BlazorSampleApp1.Data
+﻿namespace BlazorSampleApp.Data
 {
     public class SelectOption
     {

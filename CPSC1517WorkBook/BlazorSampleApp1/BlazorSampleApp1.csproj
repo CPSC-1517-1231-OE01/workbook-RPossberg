@@ -11,8 +11,6 @@
     <ProjectReference Include="..\HockeyConsoleApp\HockeyConsoleApp.csproj" />
     <ProjectReference Include="..\HockeyData\HockeyData.csproj" />
     <ProjectReference Include="..\HockeyTestProject\HockeyTestProject.csproj" />
-    <ProjectReference Include="..\ObjectClassLibraryTest\ObjectClassLibraryTest.csproj" />
-    <ProjectReference Include="..\ObjectClassLibrary\ObjectClassLibrary.csproj" />
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
 

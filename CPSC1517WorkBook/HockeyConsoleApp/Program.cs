@@ -19,7 +19,7 @@ HockeyPlayer player2 = new HockeyPlayer("Bobby", "Orr", "Parry Sound, ON", new D
     196, 73, 28, Position.Defense, Shot.Right);
 
 // Testing overloaded IsInTheFuture
-Console.WriteLine($"Date in future? {Utilities.IsDateInFuture(new DateTime(2023, 9, 12))}");
+Console.WriteLine($"Date in future? {Util.Utilities.IsDateInFuture(new DateTime(2023, 9, 12))}");
 
 // Everything but the Age can be done day one of week two
 // Console.WriteLine($"The player's name is {player1.ToString()}, they are born {player1.DateOfBirth} and are {player1.Age} years old.");

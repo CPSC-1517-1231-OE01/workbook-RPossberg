@@ -1,5 +1,5 @@
 ﻿@page "/edmonton-oilers"
-@    using Hockey.Data
+@using HockeyData
 
 <h3>Edmonton Oilers Roster</h3>
 
@@ -7,7 +7,6 @@
     This Blazor Component displays a list of players on the Edmonton Oilers team for the 2023-24 season
     using data from a CSV file.
 </p>
-
 @if (FeedbackMessage != null)
 {
     <div class="alert alert-danger">
