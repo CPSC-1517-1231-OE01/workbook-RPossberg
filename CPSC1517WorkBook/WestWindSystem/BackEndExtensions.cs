@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 // Required namespaces
 using WestWindSystem.BLL;
 using WestWindSystem.DAL;
-
 //***************************************************************
 
 namespace WestWindSystem
@@ -36,14 +35,6 @@ namespace WestWindSystem
                 // pass in the required context to the internal constructor (must be
                 // performed from within the assembly, which this class (BackEndExtensions) is.
                 return new CustomerServices(context!);
-            });
-
-            // AddTransient<T>() method to add service classes, where T is the class name
-            // AddTransient is called a factory method
-            services.AddTransient<CategoryServices>((serviceProvider) =>
-            {
-                var context = serviceProvider.GetService<WestWindContext>();
-                return new CategoryServices(context!);
             });
         }
     }
