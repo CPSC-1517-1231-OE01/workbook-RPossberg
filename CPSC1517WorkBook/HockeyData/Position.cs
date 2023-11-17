@@ -1,4 +1,4 @@
-﻿namespace HockeyData
+﻿namespace Hockey.Data
 {
     /// <summary>
     ///  Represents the available hockey positions.

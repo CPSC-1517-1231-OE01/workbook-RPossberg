@@ -1,0 +1,50 @@
+﻿@page "/customers/{CustomerId}"
+@using WestWindSystem.Entities
+@using WestWindSystem.BLL
+
+<h3>Customer Page</h3>
+
+@if (CurrentCustomer != null)
+{
+    <div>
+        <p>@CurrentCustomer.ContactName</p>
+    </div>
+}
+else
+{
+    <div class="alert alert-info">
+        <p>
+            No customer found @(string.IsNullOrWhiteSpace(CustomerId)
+        ? "" :
+        $"with id = {CustomerId}")
+        </p>
+    </div>
+}
+<<<<<<< HEAD
+@* The @code block is used to define the code for the component. *@
+=======
+>>>>>>> parent of d9c3778 (The most important changes include adding namespace references to BackEndExtensions.cs file, registering CategoryServices using AddTransient method in BackEndExtensions.cs file, and adding a new menu item to NavMenu.razor file.)
+
+@code {
+    [Parameter]
+    public string? CustomerId { get; set; }
+
+    public Customer? CurrentCustomer { get; set; }
+
+    // The [Inject] attribute marks a property as being injected by the
+    // application service provider, which has been updated in the
+    // Program.cs file.
+    [Inject]
+    CustomerServices? CustomerServices { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (CustomerId != null && CustomerServices != null)
+        {
+            CurrentCustomer = CustomerServices.GetCustomerById(CustomerId);
+        }
+
+        base.OnInitialized();
+    }
+}
+

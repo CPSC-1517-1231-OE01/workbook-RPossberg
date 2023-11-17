@@ -1,0 +1,16 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+<<<<<<< HEAD
+    "WWDB": "Server=.;Database=WestWind;TrustServerCertificate=True;Trusted_Connection=true"
+=======
+    "WWDB": "Server=.;Database=WestWind;TrustServerCertificate=True;Trusted_Connection=true;MultipleActiveResultSets=true"
+>>>>>>> parent of 82755d9 (The most important changes include modifying the 'GetProductsByCategoryId' and 'GetProductsByNameOrSupplierName' methods in ProductServices.cs to include the 'Supplier' entity in the returned list of products, adding a new 'Search for Products' fieldset to the 'ProductsPage' razor component to allow searching for products by name or supplier name, and modifying the 'ProductsPage' razor component to include injected instances of 'CategoryServices', 'ProductServices', and 'NavigationManager' and handle category and product searches.)
+  }
+}

@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace HockeyData
+namespace Hockey.Data
 {
     /// <summary>
     /// An instance of this class will hold data about a hockey player
