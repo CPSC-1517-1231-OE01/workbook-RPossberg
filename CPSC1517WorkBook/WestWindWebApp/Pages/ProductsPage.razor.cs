@@ -7,13 +7,13 @@ namespace WestWindWebApp.Pages
     public partial class ProductsPage
     {
         [Inject]
-        CategoryServices CategoryServices { get; set; }
+        private CategoryServices? CategoryServices { get; set; }
 
         [Inject]
-        ProductServices ProductServices { get; set; }
+        private ProductServices? ProductServices { get; set; }
 
         [Inject]
-        NavigationManager NavigationManager { get; set; }
+        private NavigationManager? NavigationManager { get; set; }
 
         public List<Category>? Categories { get; set; }
         public List<Product>? Products { get; set; }
@@ -21,7 +21,7 @@ namespace WestWindWebApp.Pages
         [Parameter]
         public int CategoryId { get; set; }
 
-        public string PartialSearch { get; set; }
+        public string? PartialSearch { get; set; }
 
         protected override void OnInitialized()
         {
@@ -50,7 +50,7 @@ namespace WestWindWebApp.Pages
         {
             if (!string.IsNullOrWhiteSpace(PartialSearch))
             {
-                Products = ProductServices.GetProductsByCategoryId(CategoryId);
+                Products = ProductServices.GetProductsByNameOrSupplierName(PartialSearch);
                 CategoryId = 0;
                 NavigationManager.NavigateTo($"/products");
             }
