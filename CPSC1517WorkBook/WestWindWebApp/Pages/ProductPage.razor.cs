@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using WestWindSystem.BLL;
 using WestWindSystem.Entities;
 
@@ -6,6 +7,9 @@ namespace WestWindWebApp.Pages
 {
     public partial class ProductPage
     {
+        [Inject]
+        IJSRuntime JSRuntime { get; set; }
+
         [Inject]
         ProductServices ProductServices { get; set; }
 
